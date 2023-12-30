@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     dispatch(forgotpassword(email, setEmailSent));
   }
   return loading ? (
-    <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center">
+    <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
       <div className="spinner">
         <div></div>
         <div></div>
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
       </div>
     </div>
   ) : (
-    <div className="grid min-h-[calc(100vh-4rem)] place-items-center">
+    <div className="grid min-h-[calc(100vh-4rem)] place-items-center pt-[4rem]">
       <div className="max-w-[500px] p-4 lg:p-8">
         <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
           {!emailSent ? "Reset your password" : "Check email"}

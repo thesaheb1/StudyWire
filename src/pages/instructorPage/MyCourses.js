@@ -24,7 +24,7 @@ const MyCourses = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (loading ? <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
+  return (loading ? <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center">
     <div className="spinner">
       <div></div>
       <div></div>
