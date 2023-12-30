@@ -71,7 +71,11 @@ const Courses = () => {
         <div></div>
       </div>
     </div>) : (
+<<<<<<< HEAD
     <div className="w-full min-h-[calc(100vh-5rem)] px-8 pt-[6rem]">
+=======
+    <div className="w-full min-h-[calc(100vh-5rem)] p-4 pt-[6rem]">
+>>>>>>> 03e5291c4939c3f6108b612e9ee7c7a5193c3bcf
       <div className="w-full md:w-[90%] xl:w-4/5 2xl:w-8/12 mx-auto flex flex-col justify-start items-center">
         <div className="sm:my-8">
           <p className="text-lg sm:text-xl lg:text-2xl flex justify-around items-center font-[900] text-richblack-5/40 tracking-[4px] sm:tracking-[15px] xl:tracking-[20px]">
