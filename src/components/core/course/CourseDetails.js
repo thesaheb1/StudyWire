@@ -121,7 +121,7 @@ function CourseDetails() {
 
   }
 
-  return loading ? (<div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center">
+  return loading ? (<div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
     <div className="spinner">
       <div></div>
       <div></div>
@@ -130,7 +130,7 @@ function CourseDetails() {
       <div></div>
     </div>
   </div>) :
-    (<div className="w-full min-h-[calc(100vh-4rem)]">
+    (<div className="w-full min-h-[calc(100vh-4rem)] pt-[4rem]">
       <div className="w-full bg-richblack-800 flex flex-col justify-start items-start">
         <div className="w-8/12 mx-auto relative">
           <div className="w-[60%]">
