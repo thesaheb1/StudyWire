@@ -71,8 +71,8 @@ const Courses = () => {
         <div></div>
       </div>
     </div>) : (
-    <div className="w-full min-h-[calc(100vh-5rem)] p-4 pt-[6rem]">
-      <div className="xl:w-8/12 mx-auto flex flex-col justify-start items-center">
+    <div className="w-full min-h-[calc(100vh-5rem)] px-8 pt-[6rem]">
+      <div className="w-full md:w-[90%] xl:w-4/5 2xl:w-8/12 mx-auto flex flex-col justify-start items-center">
         <div className="sm:my-8">
           <p className="text-lg sm:text-xl lg:text-2xl flex justify-around items-center font-[900] text-richblack-5/40 tracking-[4px] sm:tracking-[15px] xl:tracking-[20px]">
             <span>THE</span> <span>STUDY</span> <span>WIRE</span>
@@ -80,7 +80,7 @@ const Courses = () => {
           <h1 className="text-6xl sm:text-8xl lg:text-9xl gradient font-bold">COURSES.</h1>
         </div>
         <CourseFilterOptions />
-        <div className="w-full flex justify-start items-start gap-12 flex-wrap m-8">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
           {
             filteredData?.length > 0 ?
               filteredData?.map((data => (

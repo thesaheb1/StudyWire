@@ -3,12 +3,12 @@ import { TiStarFullOutline } from "react-icons/ti";
 import { TiStarHalfOutline } from "react-icons/ti";
 import { TiStarOutline } from "react-icons/ti";
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags }) => {
+  const navigate = useNavigate();
   return (
-    <Link to={_id}>
-      <div className="w-full sm:w-[400px] sm:h-[550px] flex flex-col justify-between bg-richblack-500/30 border-[1px] border-richblack-700 rounded-lg cursor-pointer hover:shadow-[rgba(255,255,255,0.2)_10px_10px_10px_0px] hover:scale-105 transition-all duration-200">
+      <div onClick={() => navigate(_id)} className="flex flex-col justify-between bg-richblack-500/30 border-[1px] border-richblack-700 rounded-lg cursor-pointer hover:shadow-[rgba(255,255,255,0.2)_10px_10px_10px_0px] hover:scale-105 transition-all duration-200">
         <img
           className="rounded-lg w-full aspect-video pb-2"
           src={thumbnail}
@@ -53,7 +53,6 @@ const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags }) => 
           <p className="text-xl text-caribbeangreen-50 font-bold">₹ {price}</p>
         </div>
       </div>
-    </Link>
   );
 };
 
