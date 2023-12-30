@@ -20,10 +20,8 @@ import { logout } from "../../services/operations/authOperation";
 import { NavbarLinks } from "../../utils/data/navbar-links";
 
 // icons
-import { BsBagHeart } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { VscAccount } from "react-icons/vsc";
-import { VscDashboard } from "react-icons/vsc";
 import { RiSettings2Fill } from "react-icons/ri";
 import { ImExit } from "react-icons/im";
 import { FaCartShopping } from "react-icons/fa6";
