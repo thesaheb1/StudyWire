@@ -5,6 +5,8 @@ const {
   imageUploaderToCloudinary,
 } = require("../utils/imageUploaderToCloudinary");
 require("dotenv").config();
+
+
 // profile updation
 exports.updateProfile = async (req, res) => {
   const {
@@ -51,7 +53,7 @@ exports.updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(req?.user?.id, {
       firstName,
       lastName,
-    }).populate("additionalDetails")
+    },{new:true}).populate("additionalDetails")
       .populate({
         path: "courses",
         populate: {
@@ -167,6 +169,8 @@ exports.updateDisplayPicture = async (req, res) => {
   const userId = req?.user?.id;
   const DP = req?.files?.image;
 
+  console.log("Display Picture Data....",DP);
+
   if (!DP) {
     return res.status(400).json({
       status: false,
@@ -187,7 +191,7 @@ exports.updateDisplayPicture = async (req, res) => {
       return res.status(500).json({
         status: false,
         statusCode: 500,
-        error: error.message,
+        error: error?.message,
         message: "Image Upload Failed, Try Again Later",
       });
     }
