@@ -3,7 +3,7 @@ import CartList from "../../components/core/cart/CartList";
 
 const Cart = () => {
   return (
-    <div className="w-8/12 mx-auto min-h-[calc(100vh-4rem)] text-white p-4">
+    <div className="w-8/12 mx-auto min-h-[calc(100vh-4rem)] text-white p-[5rem]">
       <h1 className="py-8 text-4xl text-richblack-5 text-left font-medium">
         My Cart
       </h1>

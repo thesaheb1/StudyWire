@@ -30,7 +30,7 @@ const Sidebar = () => {
   }
 
   return  (
-    <div className="absolute z-[9] sm:static min-w-fit min-h-[calc(100vh-5rem)] border-r-[1px] bg-richblack-900 border-richblack-600">
+    <div className="absolute z-[9] sm:static min-w-fit min-h-[calc(100vh-4rem)] border-r-[1px] bg-richblack-900 border-richblack-600">
     <div className="w-full p-4 flex justify-end text-yellow-50 text-2xl"><FiMenu onClick={() => setHideAsideBar(!hideAsideBar)} className="cursor-pointer" /></div>
     {<div className="flex flex-col justify-center items-start py-8">
         {sidebarLinks.map((sidelink) => {

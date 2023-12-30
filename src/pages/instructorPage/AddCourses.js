@@ -7,7 +7,7 @@ const AddCourses = () => {
   // const [hideTips, setHideTips] = useState(false);
  
   return (
-    <div className="w-full max-h-[calc(100vh-4rem)] overflow-y-auto ml-[60px] p-4 sm:p-8 xl:p-16">
+    <div className="w-full max-h-[calc(100vh-4rem)] overflow-y-auto ml-[60px] p-[5rem] sm:p-[6rem] xl:p-[8rem]">
       <h1 className="w-full md:max-w-[700px] py-8 text-2xl sm:text-4xl text-richblack-5 text-center sm:text-left">
         Create Course
       </h1>

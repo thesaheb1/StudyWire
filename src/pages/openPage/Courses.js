@@ -62,7 +62,7 @@ const Courses = () => {
 
 
   return loading ? (
-    <div className="w-full min-h-[calc(100vh-4rem)] my-auto flex justify-center items-center pt-[5rem]">
+    <div className="w-full min-h-[calc(100vh-4rem)] my-auto flex justify-center items-center pt-[4rem]">
       <div className="spinner">
         <div></div>
         <div></div>

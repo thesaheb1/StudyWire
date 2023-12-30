@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 const Profile = () => {
   const { credentialData } = useSelector((state) => state.auth);
   return (
-    <div className="w-full max-h-[calc(100vh-4rem)] flex justify-center items-start overflow-y-auto ml-[60px] sm:ml-0 p-4 sm:p-8 xl:p-16">
+    <div className="w-full max-h-[calc(100vh-4rem)] flex justify-center items-start overflow-y-auto ml-[60px] sm:ml-0 p-[5rem] sm:p-[6rem] xl:p-[8rem]">
       <div className="w-full lg:w-[800px] flex flex-col gap-4 sm:gap-8">
         <h1 className="text-2xl sm:text-4xl text-richblack-5 text-center my-8 sm:my-0 sm:text-left">My Profile</h1>
         <div className="p-4 sm:p-8 border-[1px] border-richblack-700 bg-richblack-800 rounded-md">
