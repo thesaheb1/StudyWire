@@ -89,6 +89,7 @@ const Header = () => {
             })}
           </ul>
         </div>
+        <div className="flex justify-center gap-x-2 items-center">
         {credentialData ? (
           <div className="relative flex justify-center items-center gap-x-4">
             {credentialData?.accountType === "Student" && (
@@ -186,6 +187,7 @@ const Header = () => {
         )}
         <div onClick={() => setMenu(!menu)} className="text-3xl text-yellow-50 cursor-pointer block lg:hidden">
           <FiMenu />
+        </div>
         </div>
       </nav>
       <div className={`transition-all duration-500 fixed top-[4rem] z-[99] right-0 ${menu ? "w-[200px]" : "w-0"} min-h-[calc(100vh-4rem)]  block bg-richblack-900 lg:hidden`}>
