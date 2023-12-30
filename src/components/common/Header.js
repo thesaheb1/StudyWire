@@ -27,6 +27,7 @@ import { ImExit } from "react-icons/im";
 import { FaCartShopping } from "react-icons/fa6";
 import ConfirmationModal from "./ConfirmationModal";
 import MenuLinks from "./MenuLinks";
+import { ACCOUNT_TYPE } from "../../utils/data/constants";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,7 +39,8 @@ const Header = () => {
   const [showModal, setShowModal] = useState(null);
   const [menu, setMenu] = useState(false);
 
-  const ref = useRef();
+  const avtarRef = useRef();
+  const menuRef = useRef();
 
   // route checker
   const MathRoute = (route) => {
@@ -52,15 +54,25 @@ const Header = () => {
 
   // Onclick listener in useEffect
   useEffect(() => {
+
     const handleDropDown = (event) => {
-      if (!(event?.target === ref?.current)) {
+      if (!(event?.target === avtarRef?.current)) {
         setDropDown(false);
       }
     };
 
+    const handleMenu = (event) => {
+      if (!(event?.target === menuRef?.current)) {
+        setMenu(false);
+        
+      }
+    };
+
     window.addEventListener("click", handleDropDown);
+    window.addEventListener("click", handleMenu);
     return () => {
       window.removeEventListener("click", handleDropDown);
+      window.removeEventListener("click", handleMenu);
     };
     // eslint-disable-next-line
   }, []);
@@ -92,7 +104,7 @@ const Header = () => {
         <div className="flex justify-center gap-x-2 items-center">
           {credentialData ? (
             <div className="relative flex justify-center items-center gap-x-4">
-              {credentialData?.accountType === "Student" && (
+              {credentialData?.accountType === ACCOUNT_TYPE.STUDENT && (
                 <Link
                   to={"/my-cart"}
                   className="text-[#12d7fad6] relative hover:text-[#12D8FA] cursor-pointer text-[1.7rem] mx-2 transition-all duration-200"
@@ -109,7 +121,7 @@ const Header = () => {
                 }}
                 src={credentialData?.image}
                 alt="profile"
-                ref={ref}
+                ref={avtarRef}
                 className={`${dropdown ? "border-richblack-100" : "border-transparent"
                   }  " w-9 aspect-square rounded-full cursor-pointer border-2 hover:border-richblack-100  transition-all duration-200"`}
               />
@@ -119,7 +131,6 @@ const Header = () => {
                   <ul className="flex flex-col justify-center items-start text-base text-richblack-100 font-semibold">
                     <Link
                       className="w-full"
-                      onClick={() => setDropDown(false)}
                       to="/dashboard/my-profile"
                     >
                       <li className="cursor-pointer hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
@@ -129,9 +140,8 @@ const Header = () => {
                         Dashboard
                       </li>
                     </Link>
-                    {credentialData?.accountType === "Student" && <Link
+                    {credentialData?.accountType === ACCOUNT_TYPE.STUDENT && <Link
                       className="w-full"
-                      onClick={() => setDropDown(false)}
                       to="/wishlist"
                     >
                       <li className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
@@ -185,8 +195,8 @@ const Header = () => {
               )}
             </div>
           )}
-          <div onClick={() => setMenu(!menu)} className="text-3xl text-yellow-50 cursor-pointer block lg:hidden">
-            <FiMenu />
+          <div ref={menuRef} onClick={() => setMenu(!menu)} className="text-3xl text-yellow-50 cursor-pointer block lg:hidden" >
+            <FiMenu  className="pointer-events-none"/>
           </div>
         </div>
       </nav>
