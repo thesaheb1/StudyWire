@@ -200,7 +200,7 @@ const Header = () => {
             );
           })}
 
-          {credentialData && <div className="px-4 py-8 flex justify-center items-center gap-x-4">
+          {!credentialData && <div className="px-4 py-8 flex justify-center items-center gap-x-4">
             {MathRoute("/login") ? (
               <Link to="/signup">
                 <AuthBtn color={false} text={"Signup"} />
