@@ -23,6 +23,8 @@ import { NavbarLinks } from "../../utils/data/navbar-links";
 import { BsBagHeart } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { VscAccount } from "react-icons/vsc";
+import { VscDashboard } from "react-icons/vsc";
+import { RiSettings2Fill } from "react-icons/ri";
 import { ImExit } from "react-icons/im";
 import { FaCartShopping } from "react-icons/fa6";
 import ConfirmationModal from "./ConfirmationModal";
@@ -137,20 +139,20 @@ const Header = () => {
                         <span className="text-xl">
                           <VscAccount />
                         </span>{" "}
-                        Dashboard
+                        My Profile
                       </li>
                     </Link>
-                    {credentialData?.accountType === ACCOUNT_TYPE.STUDENT && <Link
+                    <Link
                       className="w-full"
-                      to="/wishlist"
+                      to="/dashboard/my-profile"
                     >
-                      <li className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
+                      <li className="cursor-pointer hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
                         <span className="text-xl">
-                          <BsBagHeart />
+                        <RiSettings2Fill />
                         </span>{" "}
-                        Wishlist
+                        Setting
                       </li>
-                    </Link>}
+                    </Link>
                     <li
                       onClick={() =>
                         setShowModal({

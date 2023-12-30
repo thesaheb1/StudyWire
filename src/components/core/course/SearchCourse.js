@@ -24,7 +24,7 @@ const SearchCourse = () => {
 
 
   return (
-    <div className="w-full max-w-[350px] sm:w-auto p-3 mt-4 rounded-lg bg-richblack-800 text-richblack-200 flex justify-center items-center font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]">
+    <div className="w-full max-w-[300px] sm:w-auto p-3 mt-4 rounded-lg bg-richblack-800 text-richblack-200 flex justify-center items-center font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]">
       <input
         type="search"
         value={searchData}
@@ -33,7 +33,7 @@ const SearchCourse = () => {
         className="bg-transparent outline-none text-richblack-5 mx-2"
       />
       <button className="text-xl text-richblack-100 font-bold">
-        <FaSearch onClick={searchHandler}/>
+        <FaSearch onClick={searchHandler} className="mr-2"/>
       </button>
     </div>
   );

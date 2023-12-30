@@ -73,7 +73,7 @@ const Courses = () => {
     </div>) : (
     <div className="w-full min-h-[calc(100vh-5rem)] p-4 pt-[6rem]">
       <div className="xl:w-8/12 mx-auto flex flex-col justify-start items-center">
-        <div className="my-8">
+        <div className="sm:my-8">
           <p className="text-lg sm:text-xl lg:text-2xl flex justify-around items-center font-[900] text-richblack-5/40 tracking-[4px] sm:tracking-[15px] xl:tracking-[20px]">
             <span>THE</span> <span>STUDY</span> <span>WIRE</span>
           </p>
