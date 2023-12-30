@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function SignUp() {
   const {loading} = useSelector(state => state.auth);
   return loading ? (
-    <div className="w-full min-h-[calc(100vh-4rem)] flex justify-center items-center">
+    <div className="w-full min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
       <div className="spinner">
         <div></div>
         <div></div>
@@ -15,7 +15,7 @@ function SignUp() {
       </div>
     </div>
   ) : (
-    <div className="w-full min-h-[calc(100vh-4rem)]">
+    <div className="w-full min-h-[calc(100vh-4rem)] pt-[4rem]">
       <AuthTemplate
         title="Join the millions learning to code with StudyWire for free"
         desc1="Build skills for today, tomorrow, and beyond."

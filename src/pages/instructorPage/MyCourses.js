@@ -33,7 +33,7 @@ const MyCourses = () => {
       <div></div>
     </div>
   </div> :
-    <div className="w-full max-h-[calc(100vh-4rem)] overflow-y-auto ml-[60px] p-[5rem] sm:p-[6rem] xl:p-[8rem]">
+    <div className="w-full max-h-[calc(100vh-4rem)] overflow-y-auto ml-[60px] p-4 sm:p-8 xl:p-16">
       <h1 className="py-8 text-2xl sm:text-4xl text-richblack-5 text-center sm:text-left">My Course</h1>
       <div className="w-full flex flex-col gap-y-8">
         {mycourses?.length > 0 ?
