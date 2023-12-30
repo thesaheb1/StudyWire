@@ -90,81 +90,117 @@ const Header = () => {
           </ul>
         </div>
         <div className="flex justify-center gap-x-2 items-center">
-        {credentialData ? (
-          <div className="relative flex justify-center items-center gap-x-4">
-            {credentialData?.accountType === "Student" && (
-              <Link
-                to={"/my-cart"}
-                className="text-[#12d7fad6] relative hover:text-[#12D8FA] cursor-pointer text-[1.7rem] mx-2 transition-all duration-200"
-              >
-                <FaCartShopping />
-                <div className="w-[20px] aspect-square absolute -top-2 -right-2 flex justify-center items-center animate-bounce bg-yellow-50 rounded-full text-sm font-bold text-black">
-                  9
-                </div>
-              </Link>
-            )}
-            <img
-              onClick={() => {
-                setDropDown(!dropdown);
-              }}
-              src={credentialData?.image}
-              alt="profile"
-              ref={ref}
-              className={`${dropdown ? "border-richblack-100" : "border-transparent"
-                }  " w-9 aspect-square rounded-full cursor-pointer border-2 hover:border-richblack-100  transition-all duration-200"`}
-            />
+          {credentialData ? (
+            <div className="relative flex justify-center items-center gap-x-4">
+              {credentialData?.accountType === "Student" && (
+                <Link
+                  to={"/my-cart"}
+                  className="text-[#12d7fad6] relative hover:text-[#12D8FA] cursor-pointer text-[1.7rem] mx-2 transition-all duration-200"
+                >
+                  <FaCartShopping />
+                  <div className="w-[20px] aspect-square absolute -top-2 -right-2 flex justify-center items-center animate-bounce bg-yellow-50 rounded-full text-sm font-bold text-black">
+                    9
+                  </div>
+                </Link>
+              )}
+              <img
+                onClick={() => {
+                  setDropDown(!dropdown);
+                }}
+                src={credentialData?.image}
+                alt="profile"
+                ref={ref}
+                className={`${dropdown ? "border-richblack-100" : "border-transparent"
+                  }  " w-9 aspect-square rounded-full cursor-pointer border-2 hover:border-richblack-100  transition-all duration-200"`}
+              />
 
-            {dropdown && (
-              <div className="absolute z-20 top-11 right-0 rounded-md w-[150px] bg-richblack-700 p-2">
-                <ul className="flex flex-col justify-center items-start text-base text-richblack-100 font-semibold">
-                  <Link
-                    className="w-full"
-                    onClick={() => setDropDown(false)}
-                    to="/dashboard/my-profile"
-                  >
-                    <li className="cursor-pointer hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
+              {dropdown && (
+                <div className="absolute z-20 top-11 right-0 rounded-md w-[150px] bg-richblack-700 p-2">
+                  <ul className="flex flex-col justify-center items-start text-base text-richblack-100 font-semibold">
+                    <Link
+                      className="w-full"
+                      onClick={() => setDropDown(false)}
+                      to="/dashboard/my-profile"
+                    >
+                      <li className="cursor-pointer hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
+                        <span className="text-xl">
+                          <VscAccount />
+                        </span>{" "}
+                        Dashboard
+                      </li>
+                    </Link>
+                    {credentialData?.accountType === "Student" && <Link
+                      className="w-full"
+                      onClick={() => setDropDown(false)}
+                      to="/wishlist"
+                    >
+                      <li className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
+                        <span className="text-xl">
+                          <BsBagHeart />
+                        </span>{" "}
+                        Wishlist
+                      </li>
+                    </Link>}
+                    <li
+                      onClick={() =>
+                        setShowModal({
+                          btn1: "Logout",
+                          btn2: "Cancel",
+                          text1: "Are you sure?",
+                          text2: "You will be logged out of your account.",
+                          btn1Handler: () => logoutHandler(),
+                          btn2Handler: () => setShowModal(null),
+                        })
+                      }
+                      className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200"
+                    >
                       <span className="text-xl">
-                        <VscAccount />
+                        <ImExit />
                       </span>{" "}
-                      Dashboard
+                      Log out
                     </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="hidden lg:flex justify-center items-center gap-x-4">
+              {MathRoute("/login") ? (
+                <Link to="/signup">
+                  <AuthBtn color={false} text={"Signup"} />
+                </Link>
+              ) : MathRoute("/signup") ? (
+                <Link to="/login">
+                  <AuthBtn color={true} text={"Login"} />
+                </Link>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <AuthBtn color={true} text={"Login"} />
+                  </Link>{" "}
+                  <Link to="/signup">
+                    <AuthBtn color={false} text={"Signup"} />
                   </Link>
-                  {credentialData?.accountType === "Student" && <Link
-                    className="w-full"
-                    onClick={() => setDropDown(false)}
-                    to="/wishlist"
-                  >
-                    <li className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
-                      <span className="text-xl">
-                        <BsBagHeart />
-                      </span>{" "}
-                      Wishlist
-                    </li>
-                  </Link>}
-                  <li
-                    onClick={() =>
-                      setShowModal({
-                        btn1: "Logout",
-                        btn2: "Cancel",
-                        text1: "Are you sure?",
-                        text2: "You will be logged out of your account.",
-                        btn1Handler: () => logoutHandler(),
-                        btn2Handler: () => setShowModal(null),
-                      })
-                    }
-                    className="cursor-pointer w-full hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200"
-                  >
-                    <span className="text-xl">
-                      <ImExit />
-                    </span>{" "}
-                    Log out
-                  </li>
-                </ul>
-              </div>
-            )}
+                </>
+              )}
+            </div>
+          )}
+          <div onClick={() => setMenu(!menu)} className="text-3xl text-yellow-50 cursor-pointer block lg:hidden">
+            <FiMenu />
           </div>
-        ) : (
-          <div className="hidden lg:flex justify-center items-center gap-x-4">
+        </div>
+      </nav>
+      <div className={`transition-all duration-500 fixed top-[4rem] z-[99] right-0 ${menu ? "w-[200px]" : "w-0"} min-h-[calc(100vh-4rem)]  block bg-richblack-900 lg:hidden`}>
+        <ul className="text-xl flex flex-col justify-start items-start gap-y-4 mt-8 min-w-[200px] overflow-x-hidden">
+          {NavbarLinks?.map((item) => {
+            return (
+              <Link to={item?.path} key={item?.id}>
+                <MenuLinks MathRoute={MathRoute} path={item?.path} title={item?.title} icon={item?.icon} />
+              </Link>
+            );
+          })}
+
+          {credentialData && <div className="px-4 py-8 flex justify-center items-center gap-x-4">
             {MathRoute("/login") ? (
               <Link to="/signup">
                 <AuthBtn color={false} text={"Signup"} />
@@ -183,46 +219,12 @@ const Header = () => {
                 </Link>
               </>
             )}
-          </div>
-        )}
-        <div onClick={() => setMenu(!menu)} className="text-3xl text-yellow-50 cursor-pointer block lg:hidden">
-          <FiMenu />
-        </div>
-        </div>
-      </nav>
-      <div className={`transition-all duration-500 fixed top-[4rem] z-[99] right-0 ${menu ? "w-[200px]" : "w-0"} min-h-[calc(100vh-4rem)]  block bg-richblack-900 lg:hidden`}>
-      <ul className="text-xl flex flex-col justify-start items-start gap-y-4 mt-8 min-w-[200px] overflow-x-hidden">
-        {NavbarLinks?.map((item) => {
-          return (
-            <Link to={item?.path} key={item?.id}>
-              <MenuLinks MathRoute={MathRoute} path={item?.path} title={item?.title} icon={item?.icon}/>
-            </Link>
-          );
-        })}
-        <div className="px-4 py-8 flex justify-center items-center gap-x-4">
-          {MathRoute("/login") ? (
-            <Link to="/signup">
-              <AuthBtn color={false} text={"Signup"} />
-            </Link>
-          ) : MathRoute("/signup") ? (
-            <Link to="/login">
-              <AuthBtn color={true} text={"Login"} />
-            </Link>
-          ) : (
-            <>
-              <Link to="/login">
-                <AuthBtn color={true} text={"Login"} />
-              </Link>{" "}
-              <Link to="/signup">
-                <AuthBtn color={false} text={"Signup"} />
-              </Link>
-            </>
-          )}
-        </div>
-      </ul>
+          </div>}
 
-    </div>
-      { showModal && <ConfirmationModal modalData={showModal} /> }
+        </ul>
+
+      </div>
+      {showModal && <ConfirmationModal modalData={showModal} />}
     </header >
   );
 };
