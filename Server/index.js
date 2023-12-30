@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(
   cors({
     // This specifies the allowed origin
-    origin: "*",
+    origin: "https://studywire.vercel.app",
     // server can receive and process credentials like cookies and HTTP authentication
     credentials: true,
   })
