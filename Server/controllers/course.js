@@ -329,6 +329,7 @@ exports.getInstructorCourses = async (req, res) => {
 };
 
 
+
 exports.deleteCourse = async (req, res) => {
   const { courseId } = req?.body;
   try {

@@ -53,7 +53,7 @@ exports.updateProfile = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(req?.user?.id, {
       firstName,
       lastName,
-    },{new:true}).populate("additionalDetails")
+    }, { new: true }).populate("additionalDetails")
       .populate({
         path: "courses",
         populate: {
@@ -138,8 +138,16 @@ exports.getUserDetails = async (req, res) => {
   const userId = req?.user?.id;
 
   try {
-    const userDatails = await User.findById(userId)
-      .populate("additionalDetails")
+    const userDatails = await User.findById(userId).populate("additionalDetails")
+      .populate({
+        path: "courses",
+        populate: {
+          path: "courseContent",
+          populate: {
+            path: "subSection",
+          },
+        },
+      })
       .exec();
     if (!userDatails) {
       return res.status(404).json({
@@ -169,7 +177,7 @@ exports.updateDisplayPicture = async (req, res) => {
   const userId = req?.user?.id;
   const DP = req?.files?.image;
 
-  console.log("Display Picture Data....",DP);
+  console.log("Display Picture Data....", DP);
 
   if (!DP) {
     return res.status(400).json({

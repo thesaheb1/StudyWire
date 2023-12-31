@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { profile } from "../../services/Apis";
+import { apiConnector } from "../../services/apiConnector";
+import toast from "react-hot-toast";
+import { setCredentialData } from "../../redux/feature/authSlice";
 
 const EnrolledCourses = () => {
   const tabsName = [
@@ -9,7 +13,9 @@ const EnrolledCourses = () => {
     { id: 3, title: "Completed" },
   ];
   const [activeTab, setActiveTab] = useState(tabsName[0]?.title);
-  const { credentialData } = useSelector(state => state.auth)
+  const { credentialData, token } = useSelector(state => state.auth)
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   function getTotalTimeDuration(course) {
     let totalTime = 0;
@@ -28,7 +34,52 @@ const EnrolledCourses = () => {
     return totalTime;
   }
 
-  return (
+  const fetchUserDetails = async () => {
+
+    setLoading(true);
+    try {
+      const response = await apiConnector("GET", profile.get_user_details_api,null,{
+        Authorization: `Bearer ${token}`,
+      })
+
+      console.log("User details.....",response)
+
+      if (!response?.data?.status) {
+        throw new Error(response)
+      }
+
+      dispatch(setCredentialData(response?.data?.data));
+      toast.success("User details fetched successfully")
+
+
+    } catch (error) {
+      console.log("Fetching User Details............", error);
+      toast.error(error?.response?.data?.message);
+    }
+
+    setLoading(false);
+  }
+
+  useEffect(() => {
+
+    // fetch user Details
+    fetchUserDetails();
+
+
+    // eslint-disable-next-line
+  }, [])
+
+
+  return loading ? (
+    <div className="w-full min-h-[calc(100vh-4rem)] my-auto flex justify-center items-center pt-[4rem]">
+      <div className="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>) : (
     <div className="w-full h-full ml-[60px] m-2 sm:m-8 xl:m-16">
       <div className="w-full flex items-center flex-col sm:justify-start sm:items-start gap-y-8">
         <h1 className="text-2xl sm:text-4xl text-richblack-5">

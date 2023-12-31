@@ -142,7 +142,7 @@ const Header = () => {
                     </Link>
                     <Link
                       className="w-full"
-                      to="/dashboard/my-profile"
+                      to="/dashboard/settings"
                     >
                       <li className="cursor-pointer hover:bg-richblack-800 hover:text-richblack-5 rounded-md p-2 flex justify-start-start items-center gap-x-2 transition-all duration-200">
                         <span className="text-xl">

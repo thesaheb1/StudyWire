@@ -29,7 +29,7 @@ import instructor from "../../assets/Images/Instructor.jpg";
 const Home = () => {
   return (
     <div className="Home px-4 w-full flex flex-col justify-start items-center pt-[4rem]">
-      <div className="w-full md:w-8/12 flex flex-col justify-center items-center my-12 sm:my-20">
+      <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col justify-center items-center my-12 sm:my-20">
         <Link
           to="/signup"
           className="gradient max-w-fit text-[#12D8FA] flex justify-center items-center gap-4 rounded-full py-1 px-6 md:py-2 md:px-12 border-b-2 border-richblack-200 shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)] hover:scale-105 transition-all duration-200"
