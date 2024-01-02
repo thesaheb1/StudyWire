@@ -198,13 +198,6 @@ exports.updateDisplayPicture = async (req, res) => {
       );
       console.log("Dp uploaded on cloud Successfully");
     } catch (error) {
-    
-      console.log("cloud name : ", process.env.CLOUDINARY_CLOUD_NAME)
-      console.log("api key name : ", process.env.CLOUDINARY_API_KEY)
-      console.log("api secret name : ", process.env.CLOUDINARY_API_SECRET)
-
-      console.log("Img Error : ",error);
-      console.log("Img Error msg : ",error.message);
       return res.status(500).json({
         status: false,
         statusCode: 500,
