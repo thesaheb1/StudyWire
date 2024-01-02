@@ -192,10 +192,14 @@ exports.updateDisplayPicture = async (req, res) => {
     try {
       DpUrl = await imageUploaderToCloudinary(
         DP,
-        process.env.CLOUDINARY_FOLDER_NAME
+        process.env.CLOUDINARY_FOLDER_NAME,
+        500,
+        500
       );
       console.log("Dp uploaded on cloud Successfully");
     } catch (error) {
+      console.log("Img Error : ",error);
+      console.log("Img Error msg : ",error.message);
       return res.status(500).json({
         status: false,
         statusCode: 500,
