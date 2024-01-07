@@ -218,10 +218,9 @@ exports.getAllCourses = async (req, res) => {
         category:true,
         createdAt:true,
         courseLanguage: true,
+        courseContent:true,
       }
-    )
-      .populate("instructor").populate("category")
-      .exec();
+    ).populate("ratingAndReview").populate("category").populate("instructor").exec();
     if (!allCourses) {
       return res.status(404).json({
         status: false,

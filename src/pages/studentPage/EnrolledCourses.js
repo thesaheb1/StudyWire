@@ -5,6 +5,7 @@ import { profile } from "../../services/Apis";
 import { apiConnector } from "../../services/apiConnector";
 import toast from "react-hot-toast";
 import { setCredentialData } from "../../redux/feature/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const EnrolledCourses = () => {
   const tabsName = [
@@ -16,6 +17,7 @@ const EnrolledCourses = () => {
   const { credentialData, token } = useSelector(state => state.auth)
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function getTotalTimeDuration(course) {
     let totalTime = 0;
@@ -109,12 +111,12 @@ const EnrolledCourses = () => {
       </div>
       <div className="w-full max-h-[calc(100vh-15rem)] sm:max-h-[calc(100vh-18rem)] lg:max-h-[calc(100vh-22rem)] xl:max-h-[calc(100vh-24rem)] overflow-y-auto p-2 border-2 border-richblack-700 rounded-lg lg:rounded-t-none mt-8 lg:mt-0">
         {credentialData?.courses?.map((course) => (
-          <div key={course?._id} className="w-full bg-richblack-800 text-richblack-50 font-medium flex flex-col justify-start items-start gap-y-2 mb-4 lg:flex-row lg:justify-between lg:items-center border-2 rounded-lg border-richblack-700 lg:border-x-2 lg:border-b lg:border-richblack-700 p-2">
+          <div onClick={() => navigate(`/view-course/${course?._id}/section/${course?.courseContent[0]?._id}/sub-section/${course?.courseContent[0]?.subSection[0]?._id}`)} key={course?._id} className="w-full bg-richblack-800 text-richblack-50 font-medium flex flex-col justify-start items-start gap-y-2 cursor-pointer lg:flex-row lg:justify-between lg:items-center border-2 rounded-lg border-richblack-700 lg:border-x-2 lg:border-b lg:border-richblack-700 p-2">
             <div className="lg:w-[55%] flex flex-col md:flex-row gap-4 justify-start items-start">
               <img
                 src={course?.thumbnail}
                 alt=""
-                className="w-full sm:h-24 sm:w-auto  aspect-auto rounded-lg my-auto"
+                className="w-full sm:h-24 sm:w-auto  aspect-video rounded-lg my-auto"
               />
               <div className="flex flex-col justify-between items-start">
                 <p className="text-richblack-5 text-base">

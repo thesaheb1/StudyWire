@@ -12,6 +12,7 @@ const userRoutes = require("./routes/userRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const contactRoute = require("./routes/contactRoute");
 
 // parse json data from body
 app.use(express.json());
@@ -50,6 +51,8 @@ app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/reach", contactRoute);
+
 
 // homepage route
 app.get("/", (req, res) => {

@@ -42,3 +42,7 @@ export const payment = {
     verify_payment_api: BASE_URL + "/payment/verify-payment",
     send_payment_success_email_api: BASE_URL + "/payment/send-payment-success-email",
 }
+
+export const contactus = {
+    contact_us_api: BASE_URL + "/reach/contact",
+  }

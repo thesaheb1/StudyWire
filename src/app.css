@@ -20,20 +20,6 @@ html {
     animation: right 1s infinite;
 }
 
-details {
-    transition: height 500ms ease;
-    overflow: hidden;
-}
-
-details:not([open]) {
-    height: 4.85rem;
-}
-
-details[open] {
-    height: fit-content;
-}
-
-
 
 @media (min-width: 640px) {
     /* scroll bar */

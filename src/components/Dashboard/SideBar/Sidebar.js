@@ -1,7 +1,7 @@
+import { AiOutlineSetting } from "react-icons/ai"; 
 import { FiMenu } from "react-icons/fi";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
-import { RiSettings2Fill } from "react-icons/ri";
 import { ImExit } from "react-icons/im";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { sidebarLinks } from "../../../utils/data/dashboard-links";
@@ -71,7 +71,7 @@ const Sidebar = () => {
             } text-richblack-200 text-base font-medium flex justify-start items-center gap-x-2 border-l-4 border-transparent py-2  ${hideAsideBar ? "px-8" : "px-4"} w-full`}
         >
           <span className="text-xl">
-            <RiSettings2Fill />
+          <AiOutlineSetting />
           </span>
           {hideAsideBar && "Settings"}
         </Link>

@@ -29,6 +29,7 @@ import AddCourses from "./pages/instructorPage/AddCourses";
 
 // student page
 import EnrolledCourses from "./pages/studentPage/EnrolledCourses";
+import ViewCourse from "./pages/studentPage/ViewCourse";
 import PurchasedHistory from "./pages/studentPage/PurchasedHistory";
 import Cart from "./pages/studentPage/Cart";
 
@@ -103,6 +104,14 @@ const appRouter = createBrowserRouter([
         element: (
           <RouteForStudents>
             <Cart />
+          </RouteForStudents>
+        ),
+      },
+      {
+        path: "view-course/:courseId/section/:sectionId/sub-section/:subSectionId",
+        element: (
+          <RouteForStudents>
+            <ViewCourse />
           </RouteForStudents>
         ),
       },
