@@ -35,6 +35,7 @@ const ContactUs = () => {
         } catch (error) {
             console.log("ERROR MESSAGE - ", error.message)
             setLoading(false)
+            toast.success("message sending failed")
         }
 
         toast.dismiss(tid);
