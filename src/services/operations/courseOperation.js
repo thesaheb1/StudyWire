@@ -103,7 +103,7 @@ export const updateCourse = async (data, token) => {
   return result;
 };
 
-// update course
+// fetchInstructorCourses
 export const fetchInstructorCourses = async (token) => {
   let result = null;
   try {
@@ -134,7 +134,6 @@ export const fetchCourseDetails = async (data) => {
     console.log("COURSE FETCHING API ERROR............", error);
     toast.error(error?.response?.data?.message);
   }
-  console.log("courseId data........", data)
   return result;
 };
 

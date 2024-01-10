@@ -3,6 +3,7 @@ import authSlice from "../feature/authSlice";
 import cartSlice from "../feature/cartSlice";
 import courseSlice from "../feature/courseSlice";
 import courseCreationSlice from "../feature/courseCreationSlice";
+import viewCourseSlice from "../feature/viewCourseSlice";
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         auth: authSlice,
         cart: cartSlice,
         course: courseSlice,
-        courseCreation:courseCreationSlice
+        courseCreation:courseCreationSlice,
+        viewCourse:viewCourseSlice
     }
 });
 

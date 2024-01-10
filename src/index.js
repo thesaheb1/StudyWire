@@ -108,12 +108,12 @@ const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "view-course/:courseId/section/:sectionId/sub-section/:subSectionId",
+        path: "/view-course/:courseId/section/:sectionId/sub-section/:subSectionId",
         element: (
           <RouteForStudents>
             <ViewCourse />
           </RouteForStudents>
-        ),
+        )
       },
       {
         element: (
