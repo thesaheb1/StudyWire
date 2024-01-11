@@ -22,6 +22,24 @@ export const fetchAllCoursecategories = async () => {
   return result;
 };
 
+// create a rating for course
+export const createRating = async (data, token) => {
+  const toastId = toast.loading("Loading...")
+  try {
+    const response = await apiConnector("POST", course.create_course_review_api, data, {
+      Authorization: `Bearer ${token}`,
+    })
+    if (!response?.data?.status) {
+      throw new Error(response);
+    }
+    toast.success("We got your review");
+  } catch (error) {
+    console.log("error in creating review : ", error);
+    toast.error(error?.response?.data?.message);
+  }
+  toast.dismiss(toastId)
+}
+
 // create course
 export const createCourse = async (data, token) => {
   let result = null;

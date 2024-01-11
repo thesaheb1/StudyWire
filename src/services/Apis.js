@@ -19,6 +19,8 @@ export const profile = {
 export const course = {
     // category api's
     get_all_categories_api: BASE_URL + "/course/get-all-category",
+    // category api's
+    create_course_review_api: BASE_URL + "/course/create-rating-and-review",
     // courses api's
     get_all_courses_api: BASE_URL + "/course/get-all-courses",
     get_course_details_api: BASE_URL + "/course/get-course-details",

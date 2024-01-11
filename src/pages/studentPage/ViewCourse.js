@@ -10,11 +10,13 @@ import { useParams } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import { setEntireCourse, setEntireCourseSection } from "../../redux/feature/viewCourseSlice";
+import CourseReviewModal from '../../components/core/viewCourse/CourseReviewModal';
 
 const ViewCourse = () => {
     const { courseId } = useParams();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const [reviewModal, setReviewModal] = useState(false);
 
 
 
@@ -51,10 +53,11 @@ const ViewCourse = () => {
     </div>)
         : (
             <div className='w-screen min-h-[calc(100vh)] pt-[4rem] flex justify-between items-start'>
-                <CourseAccordionator />
+                <CourseAccordionator setReviewModal={setReviewModal} />
                 <div className='w-full max-h-[calc(100vh-4rem)] overflow-y-auto bg-richblack-800'>
                 <LectureContent />
                 </div>
+                {reviewModal && <CourseReviewModal setReviewModal={setReviewModal} />}
             </div>
         )
 }
