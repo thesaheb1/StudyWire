@@ -147,7 +147,7 @@ export const fetchCourseDetails = async (data) => {
     if (!response?.data?.status) {
       throw new Error(response);
     }
-    result = response?.data?.data;
+    result = response?.data;
   } catch (error) {
     console.log("COURSE FETCHING API ERROR............", error);
     toast.error(error?.response?.data?.message);

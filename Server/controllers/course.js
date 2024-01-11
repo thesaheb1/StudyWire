@@ -2,7 +2,8 @@ const Category = require("../models/categoryModel");
 const Course = require("../models/courseModel");
 const User = require("../models/userModel");
 const Section = require("../models/sectionModel");
-const SubSection = require("../models/subSectionModel")
+const SubSection = require("../models/subSectionModel");
+const CourseProgress = require("../models/courseProgressModel");
 const {
   imageUploaderToCloudinary,
 } = require("../utils/imageUploaderToCloudinary");
@@ -247,7 +248,7 @@ exports.getAllCourses = async (req, res) => {
 
 exports.getCourseDetails = async (req, res) => {
   try {
-    const { courseId } = req?.body;
+    const { courseId, userId } = req?.body;
 
     const selectedCourse = await Course.findById(courseId)
       .populate({
@@ -273,13 +274,30 @@ exports.getCourseDetails = async (req, res) => {
         message: "Course Not Found",
       });
     }
+    if(userId){
 
-    return res.status(200).json({
-      status: true,
-      statusCode: 200,
-      data: selectedCourse,
-      message: "Course Fetched Successfully",
-    });
+      let courseProgressCount = await CourseProgress.findOne({
+        courseID: courseId,
+        userId: userId,
+      })
+      return res.status(200).json({
+        status: true,
+        statusCode: 200,
+        data: selectedCourse,
+        completedLectures: courseProgressCount?.completedVideos ? courseProgressCount?.completedVideos : [],
+        message: "Course Fetched Successfully",
+      });
+    }else{
+      return res.status(200).json({
+        status: true,
+        statusCode: 200,
+        data: selectedCourse,
+        message: "Course Fetched Successfully",
+      });
+    }
+
+
+
   } catch (error) {
     return res.status(500).json({
       status: true,

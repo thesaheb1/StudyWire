@@ -29,7 +29,7 @@ const MyCoursesCard = ({ thumbnail, courseName, courseDescription, createdAt, st
         const result = await fetchCourseDetails({ courseId });
 
         if (result) {
-            dispatch(setCreatedCourse(result));
+            dispatch(setCreatedCourse(result?.data));
             dispatch(setEditCreatedCourse(true));
             dispatch(setStep(1));
             navigate("/dashboard/add-course");

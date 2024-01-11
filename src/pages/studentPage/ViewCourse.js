@@ -8,8 +8,8 @@ import LectureContent from '../../components/core/viewCourse/LectureContent';
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { setEntireCourse, setEntireCourseSection } from "../../redux/feature/viewCourseSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setCompletedVideos, setEntireCourse, setEntireCourseSection, setTotalNoOfLectures } from "../../redux/feature/viewCourseSlice";
 import CourseReviewModal from '../../components/core/viewCourse/CourseReviewModal';
 
 const ViewCourse = () => {
@@ -17,6 +17,7 @@ const ViewCourse = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [reviewModal, setReviewModal] = useState(false);
+    const {credentialData} = useSelector(state => state.auth);
 
 
 
@@ -24,10 +25,17 @@ const ViewCourse = () => {
         (async () => {
             setLoading(true);
             try {
-                const response = await fetchCourseDetails({ courseId });
+                const response = await fetchCourseDetails({ courseId , userId : credentialData?._id });
                 if (response) {
-                    dispatch(setEntireCourse(response));
-                    dispatch(setEntireCourseSection(response?.courseContent));
+                    dispatch(setEntireCourse(response?.data));
+                    dispatch(setEntireCourseSection(response?.data?.courseContent));
+                    dispatch(setCompletedVideos(response?.completedLectures));
+                    console.log("Completed.....",response?.completedLectures);
+                    let lectures = 0
+                    response?.data?.courseContent?.forEach((section) => {
+                      lectures += section.subSection.length
+                    })
+                    dispatch(setTotalNoOfLectures(lectures))
                 }
 
             } catch (error) {

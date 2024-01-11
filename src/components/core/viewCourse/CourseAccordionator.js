@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 // icons
 import { BiArrowBack } from "react-icons/bi";
@@ -10,28 +10,14 @@ import { Link, useParams } from 'react-router-dom';
 
 const CourseAccordionator = ({setReviewModal}) => {
     const { sectionId, subSectionId } = useParams();
-    const { entireCourse, entireCourseSection, showCourseMenu } = useSelector(state => state.viewCourse);
-    const [totalLecture, setTotalLecture] = useState(0);
+    const { entireCourse, entireCourseSection, showCourseMenu, totalNoOfLectures } = useSelector(state => state.viewCourse);
 
-    useEffect(() => {
-        (() => {
-          let Count = 0;
-          entireCourseSection?.forEach((section) => {
-            Count += section?.subSection?.length;
-          });
-          setTotalLecture(Count);
-        })();
-        console.log("EFFECT rendered..........");
-        // eslint-disable-next-line
-      }, []);
-
-      console.log("UI rendered..........");
-
+   
     return showCourseMenu && (
         <div className={`max-w-[20%] min-w-[300px] p-4  min-h-[calc(100vh-4rem)] bg-richblack-800 border-r-2 border-b-2 border-richblack-700`}>
             <button onClick={() => setReviewModal(true)} className="w-full my-4 py-1 border-2 border-yellow-50 text-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 rounded-lg transition-all duration-200 flex justify-center items-center gap-2"><AiOutlinePlusCircle className="text-2xl" /><p>Add Review</p></button>
             <div className="flex justify-between items-center pb-4">
-                <p className='text-richblack-400 font-medium py-2'>Completed 2/{totalLecture}</p>
+                <p className='text-richblack-400 font-medium py-2'>Completed 2/{totalNoOfLectures}</p>
                 <Link to={"/dashboard/enrolled-courses"} className="cursor-pointer px-4 py-1 border-2 border-yellow-50 text-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 rounded-lg transition-all duration-200 flex justify-center items-center gap-2"><BiArrowBack className="text-2xl" /><p>Back</p></Link>
             </div>
             <div className='bg-richblack-700 rounded-lg'>

@@ -5,8 +5,10 @@ const viewCourseSlice = createSlice({
 
     name:"viewCourse",
     initialState:{
-        entireCourse:null,
-        entireCourseSection:null,
+        entireCourse:{},
+        entireCourseSection:[],
+        completedVideos:[],
+        totalNoOfLectures:0,
         showCourseMenu:true
     },
     reducers:{
@@ -16,6 +18,12 @@ const viewCourseSlice = createSlice({
         setEntireCourseSection: (state, action) => {
          state.entireCourseSection = action.payload;
         },
+        setCompletedVideos: (state, action) => {
+         state.completedVideos = action.payload;
+        },
+        setTotalNoOfLectures: (state, action) => {
+         state.totalNoOfLectures = action.payload;
+        },
         setShowCourseMenu: (state, action) => {
          state.showCourseMenu = action.payload;
         }
@@ -23,6 +31,6 @@ const viewCourseSlice = createSlice({
 
 });
 
-export const {setEntireCourse, setEntireCourseSection, setShowCourseMenu} = viewCourseSlice.actions;
+export const {setEntireCourse, setEntireCourseSection, setCompletedVideos, setTotalNoOfLectures, setShowCourseMenu} = viewCourseSlice.actions;
 
 export default viewCourseSlice.reducer;

@@ -73,7 +73,7 @@ function CourseDetails() {
       try {
         setLoading(true)
         const res = await fetchCourseDetails({ courseId });
-        setResponse(res)
+        setResponse(res?.data)
       } catch (error) {
         console.log("Could not fetch Course Details")
       }
