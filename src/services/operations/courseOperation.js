@@ -155,6 +155,30 @@ export const fetchCourseDetails = async (data) => {
   return result;
 };
 
+// mark a lecture as complete
+export const markLectureAsComplete = async (data, token) => {
+  let result = null;
+  const toastId = toast.loading("Loading...")
+  try {
+    const response = await apiConnector("PUT", course.update_course_progress_api, data, {
+      Authorization: `Bearer ${token}`,
+    })
+
+    if (!response?.data?.status) {
+      throw new Error(response)
+    }
+    toast.success("Lecture Completed")
+
+    result = response?.data
+  } catch (error) {
+    console.log("COURSE PROGRESS API ERROR............", error);
+    toast.error(error?.response?.data?.message);
+  }
+  toast.dismiss(toastId)
+
+  return result;
+}
+
 // update course
 export const deleteCourse = async (data, token) => {
   const toastId = toast.loading("Loading...");

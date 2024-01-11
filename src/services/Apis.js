@@ -21,6 +21,8 @@ export const course = {
     get_all_categories_api: BASE_URL + "/course/get-all-category",
     // category api's
     create_course_review_api: BASE_URL + "/course/create-rating-and-review",
+    // Update Course Progress api's
+    update_course_progress_api: BASE_URL + "/course/update-course-progress",
     // courses api's
     get_all_courses_api: BASE_URL + "/course/get-all-courses",
     get_course_details_api: BASE_URL + "/course/get-course-details",

@@ -1,5 +1,5 @@
-const SubSection = require("../models/Subsection")
-const CourseProgress = require("../models/CourseProgress")
+const SubSection = require("../models/subSectionModel")
+const CourseProgress = require("../models/courseProgressModel")
 
 exports.updateCourseProgress = async (req, res) => {
     const { courseId, subSectionId } = req?.body
@@ -62,6 +62,7 @@ exports.updateCourseProgress = async (req, res) => {
         return res.status(200).json({
             status: true,
             statusCode: 200,
+            data:courseProgress.completedVideos,
             message: "Lecture marked as Watched",
         })
     } catch (error) {

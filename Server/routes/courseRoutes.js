@@ -46,6 +46,9 @@ const {
   getSelectedCategory,
 } = require("../controllers/category");
 
+//-------------------------|Course Progress Controller|--------------------------//
+const {updateCourseProgress} = require("../controllers/courseProgress");
+
 //-------------------------|Authentication Controller|--------------------------//
 const AuthN = require("../middlewares/authentication");
 
@@ -114,6 +117,18 @@ router.post(
   AuthN,
   isStudent,
   createRatingAndReview
+);
+
+//***************************************************************************//
+//                            Course Progress Routes                         //
+//***************************************************************************//
+
+//-------------------------|Update Course Progress (only Student)|--------------------------//
+router.put(
+  "/update-course-progress",
+  AuthN,
+  isStudent,
+  updateCourseProgress
 );
 
 //-------------------------|Get Average Rating And Review (Everyone)|--------------------------//

@@ -7,7 +7,8 @@ import { IoIosCheckmarkCircleOutline } from "react-icons/io";
 import { BsArrowRepeat } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { setShowCourseMenu } from "../../../redux/feature/viewCourseSlice";
+import { setCompletedVideos, setShowCourseMenu } from "../../../redux/feature/viewCourseSlice";
+import { markLectureAsComplete } from "../../../services/operations/courseOperation";
 
 const LectureContent = () => {
     const { courseId, sectionId, subSectionId } = useParams();
@@ -17,11 +18,13 @@ const LectureContent = () => {
 
     const { entireCourse, entireCourseSection, showCourseMenu } =
         useSelector((state) => state.viewCourse);
+    const { token } = useSelector((state) => state.auth);
 
     const [currentVideo, setCurrentVideo] = useState({});
     const [videoEnded, setVideoEnded] = useState(false);
+    const [loading, setLoading] = useState(false);
     let videoRef = useRef();
-    
+
     const rewatchHandler = () => {
         if (videoRef?.current) {
             // set the current time of the video to 0
@@ -29,6 +32,17 @@ const LectureContent = () => {
             videoRef.current.play();
             setVideoEnded(false)
         }
+    }
+    const markAsCompletedHandler = async () => {
+        setLoading(true)
+        const response = await markLectureAsComplete(
+            { courseId: courseId, subsectionId: subSectionId },
+            token
+        )
+        if (response) {
+            dispatch(setCompletedVideos(response))
+        }
+        setLoading(false)
     }
 
     const goToNext = () => {
@@ -159,6 +173,7 @@ const LectureContent = () => {
                 <div className="flex justify-center items-center gap-2">
                     {!isFirstVideo() && (
                         <button
+                            disabled={loading}
                             onClick={() => {
                                 goToPrevious();
                             }}
@@ -170,6 +185,7 @@ const LectureContent = () => {
                     )}
                     {!isLastVideo() && (
                         <button
+                            disabled={loading}
                             onClick={() => {
                                 goToNext();
                             }}
@@ -187,13 +203,15 @@ const LectureContent = () => {
 
                 </video>
                 {videoEnded && <div className="absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] flex justify-center items-center gap-2">
-                    <button onClick={rewatchHandler}
+                    <button disabled={loading} onClick={rewatchHandler}
                         className="px-4 text-xl py-1 bg-yellow-50 hover:bg-yellow-100 text-richblack-900 rounded-lg transition-all duration-200 flex justify-center items-center gap-2"
                     >
                         <BsArrowRepeat className="text-2xl" />
                         <p>Rewatch</p>
                     </button>
                     <button
+                        disabled={loading}
+                        onClick={markAsCompletedHandler}
                         className="px-4 text-xl py-1 bg-yellow-50 hover:bg-yellow-100 text-richblack-900  rounded-lg transition-all duration-200 flex justify-center items-center gap-2"
                     >
                         <p>MarkAsCompleted</p>
