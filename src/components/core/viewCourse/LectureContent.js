@@ -36,7 +36,7 @@ const LectureContent = () => {
     const markAsCompletedHandler = async () => {
         setLoading(true)
         const response = await markLectureAsComplete(
-            { courseId: courseId, subsectionId: subSectionId },
+            { courseId, subSectionId },
             token
         )
         if (response) {
