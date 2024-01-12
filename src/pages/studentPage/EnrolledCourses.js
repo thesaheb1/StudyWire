@@ -8,6 +8,8 @@ import { setCredentialData } from "../../redux/feature/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const EnrolledCourses = () => {
+  const { totalNoOfLectures, completedVideos } = useSelector(state => state.viewCourse);
+
   const tabsName = [
     { id: 1, title: "All" },
     { id: 2, title: "Pending" },
@@ -40,11 +42,11 @@ const EnrolledCourses = () => {
 
     setLoading(true);
     try {
-      const response = await apiConnector("GET", profile.get_user_details_api,null,{
+      const response = await apiConnector("GET", profile.get_user_details_api, null, {
         Authorization: `Bearer ${token}`,
       })
 
-      console.log("User details.....",response)
+      console.log("User details.....", response)
 
       if (!response?.data?.status) {
         throw new Error(response)
@@ -110,7 +112,7 @@ const EnrolledCourses = () => {
       </div>
       <div className="w-full max-h-[calc(100vh-15rem)] sm:max-h-[calc(100vh-18rem)] lg:max-h-[calc(100vh-22rem)] xl:max-h-[calc(100vh-24rem)] overflow-y-auto p-2 border-2 border-richblack-700 rounded-lg lg:rounded-t-none mt-8 lg:mt-0">
         {credentialData?.courses?.map((course) => (
-          <div onClick={() => navigate(`/view-course/${course?._id}/section/${course?.courseContent[0]?._id}/sub-section/${course?.courseContent[0]?.subSection[0]?._id}`)} key={course?._id} className="w-full bg-richblack-800 text-richblack-50 font-medium flex flex-col justify-start items-start gap-y-2 cursor-pointer lg:flex-row lg:justify-between lg:items-center border-2 rounded-lg border-richblack-700 lg:border-x-2 lg:border-b lg:border-richblack-700 p-2">
+          <div onClick={() => navigate(`/view-course/${course?._id}/section/${course?.courseContent[0]?._id}/sub-section/${course?.courseContent[0]?.subSection[0]?._id}`)} key={course?._id} className="w-full mb-2 bg-richblack-800 text-richblack-50 font-medium flex flex-col justify-start items-start gap-y-2 cursor-pointer lg:flex-row lg:justify-between lg:items-center border-2 rounded-lg border-richblack-700 lg:border-x-2 lg:border-b lg:border-richblack-700 p-2">
             <div className="lg:w-[55%] flex flex-col md:flex-row gap-4 justify-start items-start">
               <img
                 src={course?.thumbnail}
@@ -132,9 +134,12 @@ const EnrolledCourses = () => {
             </div>
             <div className="w-full lg:w-1/5">
               <div className="lg:max-w-[200px]">
-                <p className="text-richblack-50 text-base pb-2">course</p>
+                {/* <p className="text-richblack-50 text-base pb-2">course</p> */}
 
-                <ProgressBar completed="65" height="8px" isLabelVisible={false} />
+                <div className="flex justify-between items-center w-full">
+                  <ProgressBar className="w-[80%]" completed={parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)} bgColor="#FFD60A" baseBgColor="#585D69" isLabelVisible={false} height="10px" />
+                  <p className="w-[15%] text-yellow-50 text-lg font-bold">{parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)}%</p>
+                </div>
               </div>
             </div>
           </div>
