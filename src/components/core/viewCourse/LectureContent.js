@@ -228,8 +228,8 @@ const LectureContent = ({setReviewModal}) => {
                     </div>}
                 </div>
                 <div className="sm:hidden flex justify-between items-center gap-x-4 w-[90%] pt-4">
-                    <ProgressBar className="w-full" completed={parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)} bgColor="#FFD60A" baseBgColor="#585D69" isLabelVisible={false} height="10px" />
-                    <p className="text-yellow-50 text-lg font-bold">{parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)}%</p>
+                    <ProgressBar className="w-full" completed={parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)} bgColor={parseInt(((completedVideos?.length) / totalNoOfLectures) * 100) === 100 ? "#03C988" : "#FFD60A"} baseBgColor="#585D69" isLabelVisible={false} height="10px" />
+                    <p className={`${parseInt(((completedVideos?.length) / totalNoOfLectures) * 100) === 100 ? "text-[#03C988]" : "text-[#FFD60A]"} text-lg font-bold`}>{parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)}%</p>
                 </div>
                 <button onClick={() => setReviewModal(true)} className="sm:hidden w-[90%] my-4 py-1 border-2 border-yellow-50 text-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 rounded-lg transition-all duration-200 flex justify-center items-center gap-2"><AiOutlinePlusCircle className="text-2xl" /><p>Add Review</p></button>
 

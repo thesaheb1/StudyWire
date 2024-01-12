@@ -4,6 +4,7 @@ import { RxCross2 } from "react-icons/rx"
 import ReactStars from "react-rating-stars-component"
 import { useSelector } from "react-redux"
 import { createRating } from "../../../services/operations/courseOperation"
+import toast from "react-hot-toast"
 
 
 export default function CourseReviewModal({ setReviewModal }) {
@@ -29,6 +30,10 @@ export default function CourseReviewModal({ setReviewModal }) {
   }
 
   const onSubmit = async (data) => {
+    if(data.courseRating === 0){
+      toast.error("Please Give Atleast 1 Star")
+      return;
+    }
     await createRating(
       {
         courseId: entireCourse._id,
