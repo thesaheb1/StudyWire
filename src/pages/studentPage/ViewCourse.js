@@ -60,10 +60,10 @@ const ViewCourse = () => {
         </div>
     </div>)
         : (
-            <div className='w-screen min-h-[calc(100vh)] pt-[4rem] flex justify-between items-start'>
+            <div className='w-screen min-h-[calc(100vh)] pt-[4rem] bg-richblack-800 sm:bg-transparent flex flex-col-reverse justify-end sm:flex-row sm:justify-between sm:items-start'>
                 <CourseAccordionator setReviewModal={setReviewModal} />
                 <div className='w-full max-h-[calc(100vh-4rem)] overflow-y-auto bg-richblack-800'>
-                <LectureContent />
+                <LectureContent setReviewModal={setReviewModal}/>
                 </div>
                 {reviewModal && <CourseReviewModal setReviewModal={setReviewModal} />}
             </div>

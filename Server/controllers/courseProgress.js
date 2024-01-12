@@ -31,12 +31,12 @@ exports.updateCourseProgress = async (req, res) => {
 
         // Find the course progress document for the user and course
         let courseProgress = await CourseProgress.findOne({
-            courseID: courseId,
+            courseId: courseId,
             userId: userId,
         })
 
         if (!courseProgress) {
-            // If course progress doesn't exist, create a new one
+            // If course progress doesn't exist
             return res.status(404).json({
                 status: false,
                 statusCode: 404,

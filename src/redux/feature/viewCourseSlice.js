@@ -21,6 +21,11 @@ const viewCourseSlice = createSlice({
         setCompletedVideos: (state, action) => {
          state.completedVideos = action.payload;
         },
+        updateCompletedVideos: (state, action) => {
+            if(!state.completedVideos.includes(action.payload)){
+                state.completedVideos.push(action.payload);
+            }
+        },
         setTotalNoOfLectures: (state, action) => {
          state.totalNoOfLectures = action.payload;
         },
@@ -31,6 +36,6 @@ const viewCourseSlice = createSlice({
 
 });
 
-export const {setEntireCourse, setEntireCourseSection, setCompletedVideos, setTotalNoOfLectures, setShowCourseMenu} = viewCourseSlice.actions;
+export const {setEntireCourse, setEntireCourseSection, setCompletedVideos, updateCompletedVideos, setTotalNoOfLectures, setShowCourseMenu} = viewCourseSlice.actions;
 
 export default viewCourseSlice.reducer;

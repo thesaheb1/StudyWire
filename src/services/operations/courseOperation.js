@@ -157,7 +157,7 @@ export const fetchCourseDetails = async (data) => {
 
 // mark a lecture as complete
 export const markLectureAsComplete = async (data, token) => {
-  let result = null;
+  let result = false;
   const toastId = toast.loading("Loading...")
   try {
     const response = await apiConnector("PUT", course.update_course_progress_api, data, {
@@ -169,7 +169,7 @@ export const markLectureAsComplete = async (data, token) => {
     }
     toast.success("Lecture Completed")
 
-    result = response?.data
+    result = true;
   } catch (error) {
     console.log("COURSE PROGRESS API ERROR............", error);
     toast.error(error?.response?.data?.message);
