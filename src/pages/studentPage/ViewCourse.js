@@ -30,7 +30,6 @@ const ViewCourse = () => {
                     dispatch(setEntireCourse(response?.data));
                     dispatch(setEntireCourseSection(response?.data?.courseContent));
                     dispatch(setCompletedVideos(response?.completedLectures));
-                    console.log("Completed.....",response?.completedLectures);
                     let lectures = 0
                     response?.data?.courseContent?.forEach((section) => {
                       lectures += section.subSection.length
