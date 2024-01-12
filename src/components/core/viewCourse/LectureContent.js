@@ -179,7 +179,7 @@ const LectureContent = ({setReviewModal}) => {
                     <p className='text-richblack-400 font-medium py-2'>Completed {completedVideos?.length}/{totalNoOfLectures}</p>
                     <Link to={"/dashboard/enrolled-courses"} className="cursor-pointer px-4 py-1 border-2 border-yellow-50 text-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 rounded-lg transition-all duration-200 flex justify-center items-center gap-2"><BiArrowBack className="text-2xl" /><p>Back</p></Link>
                 </div>
-                <div className="flex justify-center items-center gap-2">
+                <div className="flex justify-end sm:justify-center items-center gap-2 pb-4 sm:pb-auto">
                     {!isFirstVideo() && (
                         <button
                             disabled={loading}
