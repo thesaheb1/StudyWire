@@ -227,7 +227,7 @@ const LectureContent = ({setReviewModal}) => {
                         </button>}
                     </div>}
                 </div>
-                <div className="sm:hidden flex justify-between items-center gap-x-4 w-[90%]">
+                <div className="sm:hidden flex justify-between items-center gap-x-4 w-[90%] pt-4">
                     <ProgressBar className="w-full" completed={(completedVideos?.length / totalNoOfLectures) * 100} bgColor="#FFD60A" baseBgColor="#585D69" isLabelVisible={false} height="10px" />
                     <p className="text-yellow-50 text-lg font-bold">{(completedVideos?.length / totalNoOfLectures) * 100}%</p>
                 </div>
