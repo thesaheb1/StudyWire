@@ -19,8 +19,7 @@ const LectureContent = ({setReviewModal}) => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const { entireCourse, entireCourseSection, showCourseMenu, completedVideos, totalNoOfLectures } =
-        useSelector((state) => state.viewCourse);
+    const { entireCourse, entireCourseSection, showCourseMenu, completedVideos, totalNoOfLectures } = useSelector((state) => state.viewCourse);
     const { token } = useSelector((state) => state.auth);
 
     const [currentVideo, setCurrentVideo] = useState({});
