@@ -136,9 +136,10 @@ exports.deleteAccount = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   const userId = req?.user?.id;
-
   try {
-    const userDatails = await User.findById(userId).populate("additionalDetails")
+    const userDatails = await User.findById(userId)
+    .populate("additionalDetails")
+    .populate("courseProgress")
       .populate({
         path: "courses",
         populate: {
