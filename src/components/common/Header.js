@@ -78,7 +78,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-screen fixed z-[999] h-[4rem] bg-richblack-900 text-white lg:text-xl border-b-[1px] border-richblack-700 flex justify-center items-center px-8">
+    <header className="w-screen fixed z-[999] h-[4rem] bg-richblack-900 text-white lg:text-xl border-b-[1px] border-richblack-700 flex justify-center items-center px-4 sm:px-8">
       <nav className="w-full xl:w-4/5 2xl:w-2/3 flex justify-between items-center py-2 md:py-4">
         <Link to="/">
           <img src={logo} alt="logo" className="w-[150px]" />
