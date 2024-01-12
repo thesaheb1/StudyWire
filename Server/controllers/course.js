@@ -250,10 +250,6 @@ exports.getCourseDetails = async (req, res) => {
   try {
     const { courseId, userId } = req?.body;
 
-
-    console.log("couurseId......: ", courseId);
-    console.log("userId......: ", userId);
-
     const selectedCourse = await Course.findById(courseId)
       .populate({
         path: "instructor",
@@ -279,7 +275,6 @@ exports.getCourseDetails = async (req, res) => {
       });
     }
     if(userId){
-      console.log("yes iam innnn")
       let courseProgressCount = await CourseProgress.findOne({
         courseId: courseId,
         userId: userId,
@@ -299,8 +294,6 @@ exports.getCourseDetails = async (req, res) => {
         message: "Course Fetched Successfully",
       });
     }
-
-
 
   } catch (error) {
     return res.status(500).json({

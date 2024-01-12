@@ -32,7 +32,7 @@ const ViewCourse = () => {
                     dispatch(setCompletedVideos(response?.completedLectures));
                     let lectures = 0
                     response?.data?.courseContent?.forEach((section) => {
-                      lectures += section.subSection.length
+                      lectures += section?.subSection?.length
                     })
                     dispatch(setTotalNoOfLectures(lectures))
                 }

@@ -19,8 +19,8 @@ const CourseAccordionator = ({ setReviewModal }) => {
         <div className={`w-full sm:w-fit sm:max-w-[20%] sm:min-w-[300px] p-4  sm:min-h-[calc(100vh-4rem)] bg-richblack-800 border-r-2 border-b-2 border-richblack-700`}>
             <button onClick={() => setReviewModal(true)} className="hidden w-full my-4 py-1 border-2 border-yellow-50 text-yellow-50 hover:bg-yellow-50 hover:text-richblack-900 rounded-lg transition-all duration-200 sm:flex justify-center items-center gap-2"><AiOutlinePlusCircle className="text-2xl" /><p>Add Review</p></button>
             <div className="hidden sm:flex justify-between items-center w-full">
-            <ProgressBar className="w-[80%]" completed={((completedVideos?.length)/totalNoOfLectures)*100} bgColor="#FFD60A" baseBgColor="#585D69" isLabelVisible={false} height="10px" />
-            <p className="w-[15%] text-yellow-50 text-lg font-bold">{(completedVideos?.length/totalNoOfLectures)*100}%</p>
+            <ProgressBar className="w-[80%]" completed={parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)} bgColor="#FFD60A" baseBgColor="#585D69" isLabelVisible={false} height="10px" />
+            <p className="w-[15%] text-yellow-50 text-lg font-bold">{parseInt(((completedVideos?.length) / totalNoOfLectures) * 100)}%</p>
             </div>
             <div className="hidden sm:flex justify-between items-center py-4">
                     <p className='text-richblack-400 font-medium py-2'>Completed {completedVideos?.length}/{totalNoOfLectures}</p>
