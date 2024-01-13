@@ -263,8 +263,8 @@ export const deleteSection = async (data, token) => {
   const toastId = toast.loading("Loading...");
 
   try {
-    console.log("data hrere : ", data);
-    console.log("link hrere : ", course.delete_section_api);
+    console.log("data here : ", data);
+    console.log("link here : ", course.delete_section_api);
     const response = await apiConnector(
       "DELETE",
       course.delete_section_api,

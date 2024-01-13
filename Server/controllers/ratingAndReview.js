@@ -150,7 +150,7 @@ exports.getAllRatingAndReviewed = async (req, res) => {
       status: true,
       statusCode: 200,
       data: allRating,
-      message: "all rating and review fetcehd successfully",
+      message: "Review fetched successfully",
     });
   } catch (error) {
     return res.status(500).json({

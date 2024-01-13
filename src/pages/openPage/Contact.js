@@ -3,6 +3,7 @@ import * as Icon1 from "react-icons/bi"
 import * as Icon3 from "react-icons/hi2"
 import * as Icon2 from "react-icons/io5"
 import ContactUs from "../../components/common/ContactUs"
+import ReviewSlider from "../../components/common/ReviewSlider"
 
 const contactDetails = [
   {
@@ -30,8 +31,8 @@ const contactDetails = [
 
 const Contact = () => {
   return (
-    <div className="py-[4rem]">
-      <div className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
+    <div className="pt-[4rem] px-4 w-full">
+      <div className="mx-auto mt-20 flex w-full sm:w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
         {/* Contact Details */}
         <div className="lg:w-[40%]">
           <div className="flex flex-col gap-6 rounded-xl bg-richblack-800 p-4 lg:p-6">
@@ -72,6 +73,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
+       {/* review section */}
+       <ReviewSlider/>
     </div>
   )
 }

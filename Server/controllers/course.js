@@ -208,7 +208,7 @@ exports.editCourse = async (req, res) => {
 exports.getAllCourses = async (req, res) => {
   try {
     const allCourses = await Course.find(
-      {status:"Published"},
+      { status: "Published" },
       {
         courseName: true,
         price: true,
@@ -216,10 +216,10 @@ exports.getAllCourses = async (req, res) => {
         thumbnail: true,
         ratingAndReview: true,
         instructor: true,
-        category:true,
-        createdAt:true,
+        category: true,
+        createdAt: true,
         courseLanguage: true,
-        courseContent:true,
+        courseContent: true,
       }
     ).populate("ratingAndReview").populate("category").populate("instructor").exec();
     if (!allCourses) {
@@ -274,7 +274,7 @@ exports.getCourseDetails = async (req, res) => {
         message: "Course Not Found",
       });
     }
-    if(userId){
+    if (userId) {
       let courseProgressCount = await CourseProgress.findOne({
         courseId: courseId,
         userId: userId,
@@ -286,7 +286,7 @@ exports.getCourseDetails = async (req, res) => {
         completedLectures: courseProgressCount?.completedVideos,
         message: "Course Fetched Successfully",
       });
-    }else{
+    } else {
       return res.status(200).json({
         status: true,
         statusCode: 200,
@@ -332,7 +332,7 @@ exports.getInstructorCourses = async (req, res) => {
       data: instructorCourses,
       message: "Course Fetched Successfully",
     });
-    
+
   } catch (error) {
     return res.status(500).json({
       status: true,
@@ -390,7 +390,7 @@ exports.deleteCourse = async (req, res) => {
 
     // remove from course creaters data's also
     await User.findByIdAndUpdate(req?.user?.id, {
-      $pull:{courses : courseId}
+      $pull: { courses: courseId }
     })
 
     return res.status(200).json({

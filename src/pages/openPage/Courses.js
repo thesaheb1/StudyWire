@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourseData, setFilteredData, setLoading } from "../../redux/feature/courseSlice";
 import { useLocation } from "react-router-dom";
+import ReviewSlider from "../../components/common/ReviewSlider";
 
 const Courses = () => {
   const { filteredData, loading } = useSelector(state => state.course)
@@ -101,6 +102,8 @@ const Courses = () => {
           <span className="gradient">hardwork...</span>
         </p>
       </div>
+       {/* review section */}
+       <ReviewSlider/>
     </div>
   );
 };

@@ -25,6 +25,7 @@ import knowYourProgress from "../../assets/Images/Know_your_progress.png";
 import compareWithOthers from "../../assets/Images/Compare_with_others.png";
 import planYourLesson from "../../assets/Images/Plan_your_lessons.png";
 import instructor from "../../assets/Images/Instructor.jpg";
+import ReviewSlider from "../../components/common/ReviewSlider";
 
 const Home = () => {
   return (
@@ -256,7 +257,7 @@ const Home = () => {
         </div>
       </div>
       {/* review section */}
-      {/* <div className="w-full md:w-8/12 flex justify-between items-center my-20"></div> */}
+      <ReviewSlider/>
     </div>
   );
 };

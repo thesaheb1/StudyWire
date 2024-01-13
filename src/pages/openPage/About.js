@@ -5,6 +5,7 @@ import BannerImage1 from "../../assets/Images/aboutus1.webp"
 import BannerImage2 from "../../assets/Images/aboutus2.webp"
 import BannerImage3 from "../../assets/Images/aboutus3.webp"
 import { Link } from "react-router-dom"
+import ReviewSlider from "../../components/common/ReviewSlider"
 
 
 const Stats = [
@@ -58,9 +59,9 @@ const LearningGridArray = [
 const About = () => {
 
   return (
-    <div className="pt-[4rem]">
+    <div className="pt-[4rem] px-4">
       <section className="bg-richblack-700">
-        <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
+        <div className="relative mx-auto flex w-full sm:w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
           <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
             Driving Innovation in Online Education for a
             <span className="bg-gradient-to-b from-[#1FA2FF] via-[#12D8FA] to-[#A6FFCB] text-transparent bg-clip-text font-bold">
@@ -184,12 +185,12 @@ const About = () => {
         </div>
       </div>
       <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
-        <div className="grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
+        <div className="grid mx-auto w-[300px] md:w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
           {LearningGridArray.map((card, i) => {
             return (
               <div
                 key={i}
-                className={`${i === 0 && "xl:col-span-2 xl:h-[294px]"}  ${card.order % 2 === 1
+                className={`${i === 0 && "md:col-span-2 xl:h-[294px]"}  ${card.order % 2 === 1
                   ? "bg-richblack-700 h-[294px]"
                   : card.order % 2 === 0
                     ? "bg-richblack-800 h-[294px]"
@@ -235,14 +236,8 @@ const About = () => {
         {/* <ContactFormSection /> */}
       </section>
 
-      {/* <div className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white"> */}
-        {/* Reviws from Other Learner */}
-        {/* <h1 className="text-center text-4xl font-semibold mt-8">
-          Reviews from other learners
-        </h1> */}
-        {/* <ReviewSlider /> */}
-      {/* </div> */}
-      {/* <Footer /> */}
+      {/* review section */}
+      <ReviewSlider/>
     </div>
   )
 }

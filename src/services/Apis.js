@@ -17,24 +17,30 @@ export const profile = {
 }
 
 export const course = {
-    // category api's
+    // Category api's
     get_all_categories_api: BASE_URL + "/course/get-all-category",
-    // category api's
+
+    // Rating And Review api's
+    get_all_rating_and_review_api: BASE_URL + "/course/get-all-rating-and-review",
     create_course_review_api: BASE_URL + "/course/create-rating-and-review",
+
     // Update Course Progress api's
     update_course_progress_api: BASE_URL + "/course/update-course-progress",
-    // courses api's
+
+    // Courses api's
     get_all_courses_api: BASE_URL + "/course/get-all-courses",
     get_course_details_api: BASE_URL + "/course/get-course-details",
     create_courses_api: BASE_URL + "/course/create-course",
     update_courses_api: BASE_URL + "/course/edit-course",
     fetch_instructor_courses_api: BASE_URL + "/course/instructor-courses",
     delete_courses_api: BASE_URL + "/course/delete-course",
-    // section api's
+
+    // Section api's
     create_section_api: BASE_URL + "/course/create-section",
     update_section_api: BASE_URL + "/course/update-section",
     delete_section_api: BASE_URL + "/course/delete-section",
-    // sub-section api's
+
+    // Sub-section api's
     create_sub_section_api: BASE_URL + "/course/create-sub-section",
     update_sub_section_api: BASE_URL + "/course/update-sub-section",
     delete_sub_section_api: BASE_URL + "/course/delete-sub-section",
