@@ -45,6 +45,7 @@ function ReviewSlider() {
                 <Swiper
                     modules={[FreeMode, Pagination, Autoplay]}
                     spaceBetween={25}
+                    scrollbar={{ draggable: true }}
                     breakpoints={{
                         480: {
                             // width: 576,
