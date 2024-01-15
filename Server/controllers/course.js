@@ -304,6 +304,7 @@ exports.getCourseDetails = async (req, res) => {
     });
   }
 };
+
 exports.getInstructorCourses = async (req, res) => {
   const instructorId = req?.user?.id;
 

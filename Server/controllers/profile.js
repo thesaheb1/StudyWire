@@ -1,6 +1,9 @@
 const User = require("../models/userModel");
 const Otp = require("../models/otpModel");
 const Profile = require("../models/profileModel");
+const Course = require("../models/courseModel");
+const RatingAndReview = require("../models/ratingAndReviewModel");
+const CourseProgress = require("../models/courseProgressModel");
 const {
   imageUploaderToCloudinary,
 } = require("../utils/imageUploaderToCloudinary");
@@ -102,9 +105,47 @@ exports.deleteAccount = async (req, res) => {
   }
 
   try {
+
+    // find the account
     const userDetails = await User.findById(userId);
+    // delete the Otp in the account
     await Otp.findOneAndDelete(userDetails?.email);
+    // delete user profile
     await Profile.findByIdAndDelete(userDetails.additionalDetails);
+
+
+
+    // unenrolled from courses
+    const unenrollCourse = await Course.find({ enrolledStudent: userId })
+    if (unenrollCourse) {
+      for (const course of unenrollCourse) {
+        await Course.findByIdAndUpdate(course?._id, { $pull: { enrolledStudent: userId } })
+      }
+    }
+
+    // delete review and ratings
+    const deleteReview = await RatingAndReview.find({ user: userId })
+
+    for (const review of deleteReview) {
+      await RatingAndReview.findByIdAndDelete(review?._id)
+      if (unenrollCourse) {
+        for (const course of unenrollCourse) {
+          await Course.findByIdAndUpdate(course?._id, { $pull: { ratingAndReview: review?._id } })
+        }
+      }
+    }
+
+
+
+    // delete courses progress
+    const deleteCourseProgress = await CourseProgress.find({ userId: userId })
+    if (deleteCourseProgress) {
+      for (const progress of deleteCourseProgress) {
+        await CourseProgress.findByIdAndDelete(progress?._id)
+      }
+    }
+
+    // finally delete the user account
     const deletedUser = await User.findByIdAndDelete(userDetails._id);
 
     if (!deletedUser) {
@@ -138,8 +179,8 @@ exports.getUserDetails = async (req, res) => {
   const userId = req?.user?.id;
   try {
     const userDatails = await User.findById(userId)
-    .populate("additionalDetails")
-    .populate("courseProgress")
+      .populate("additionalDetails")
+      .populate("courseProgress")
       .populate({
         path: "courses",
         populate: {
@@ -264,3 +305,41 @@ exports.getEnrolledCourses = async (req, res) => {
     });
   }
 };
+
+exports.getInstructorDashboard = async (req, res) => {
+  try {
+    const courseDetails = await Course.find({ instructor: req?.user?.id })
+
+    const courseData = courseDetails?.map((course) => {
+      const totalStudentsEnrolled = course?.enrolledStudent?.length
+      const totalAmountGenerated = totalStudentsEnrolled * course?.price
+
+      // Create a new object with the additional fields
+      const courseDataWithStats = {
+        _id: course?._id,
+        courseName: course?.courseName,
+        courseDescription: course?.courseDescription,
+        // Include other course properties as needed
+        totalStudentsEnrolled,
+        totalAmountGenerated,
+      }
+
+      return courseDataWithStats
+    })
+
+    return res.status(200).json({
+      status: true,
+      statusCode: 200,
+      data: courseData,
+      message: "Data Fetched successfully"
+    })
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      status: false,
+      statusCode: 500,
+      message: "Internal Server Error"
+    })
+  }
+}

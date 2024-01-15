@@ -13,7 +13,8 @@ export const profile = {
     update_dp_api: BASE_URL + "/profile/update-dp",
     update_profile_api: BASE_URL + "/profile/update-profile",
     delete_user_api: BASE_URL + "/profile/delete-account",
-    get_user_details_api: BASE_URL + "/profile/get-user-details"
+    get_user_details_api: BASE_URL + "/profile/get-user-details",
+    get_instructor_dashboard_api: BASE_URL + "/profile/get-instructor-dashboard"
 }
 
 export const course = {

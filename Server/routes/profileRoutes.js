@@ -15,10 +15,14 @@ const {
   getUserDetails,
   updateDisplayPicture,
   getEnrolledCourses,
+  getInstructorDashboard
 } = require("../controllers/profile");
 
 //-------------------------|Authentication Controller|--------------------------//
 const AuthN = require("../middlewares/authentication");
+
+//-------------------------|Authorization Controller|--------------------------//
+const { isInstructor } = require("../middlewares/authorization");
 
 //***************************************************************************//
 //                               Profile Routes                               //
@@ -38,6 +42,9 @@ router.put("/update-dp", AuthN, updateDisplayPicture);
 
 //-------------------------|Get user's Enrolled Courses (Only LoggedIn User)|--------------------------//
 router.get("/get-enrolled-courses", AuthN, getEnrolledCourses);
+
+//-------------------------|Get user's Enrolled Courses (Only LoggedIn User)|--------------------------//
+router.get("/get-instructor-dashboard", AuthN, isInstructor, getInstructorDashboard);
 
 //***************************************************************************//
 //                              Export Router                                //

@@ -20,10 +20,12 @@ import { course } from "../../services/Apis"
 
 function ReviewSlider() {
     const [reviews, setReviews] = useState([])
+    const [loading, setLoading] = useState(true)
     const truncateWords = 15
 
     useEffect(() => {
         ; (async () => {
+            setLoading(true);
             const response = await apiConnector(
                 "GET",
                 course.get_all_rating_and_review_api
@@ -32,16 +34,14 @@ function ReviewSlider() {
                 setReviews(response?.data?.data)
                 console.log("reviews....... ", response?.data?.data);
             }
+            setLoading(false);
         })()
     }, [])
 
-    // console.log(reviews)
-
-    return (
-        <>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium mt-[50px] text-richblack-5 w-full text-center">Ratings and Reviews ❤️</h1>
-        <div className="text-white w-full mx-auto flex justify-center items-center">
-            <div className="mb-[50px] mt-[24px] h-fit w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 md:text-richblue-5">
+    return !loading && (
+        reviews?.length > 0 && <div className="text-richblack-5 my-[50px] w-full mx-auto flex flex-col justify-center items-center">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium text-center min-w-full">Ratings and Reviews ❤️</h1>
+            <div className="mt-[24px] h-fit w-full sm:w-[90%] lg:w-4/5 xl:w-8/12">
                 <Swiper
                     modules={[FreeMode, Pagination, Autoplay]}
                     spaceBetween={25}
@@ -114,7 +114,6 @@ function ReviewSlider() {
             </div>
         </div>
 
-        </>
     )
 }
 

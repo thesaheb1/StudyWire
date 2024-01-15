@@ -104,3 +104,24 @@ export const updatedp = (formData, token, CredentialData) => {
       toast.dismiss(tid);
     };
   };
+
+  export const getInstructorDashboardData = async (token) => {
+    const toastId = toast.loading("Loading...")
+    let result = []
+    try {
+      const response = await apiConnector("GET", profile.get_instructor_dashboard_api, null, {
+        Authorization: `Bearer ${token}`,
+      })
+      if(!response?.data?.status){
+        throw new Error(response);
+      }
+      toast.success(response?.data?.message);
+      console.log("response?.data?.message...",response?.data?.data);
+      result = response?.data?.data;
+    } catch (error) {
+      console.log("GET_INSTRUCTOR_DATA_API API ERROR............", error)
+      toast.error(error?.response?.data?.message);
+    }
+    toast.dismiss(toastId)
+    return result
+  }

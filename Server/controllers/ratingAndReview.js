@@ -3,8 +3,8 @@ const Course = require("../models/courseModel");
 const mongoose = require("mongoose");
 
 exports.createRatingAndReview = async (req, res) => {
-  const { rating, review, courseId } = req.body;
-  const userId = req.user.id;
+  const { rating, review, courseId } = req?.body;
+  const userId = req?.user?.id;
 
   if (!rating || !review || !courseId) {
     return res.status(422).json({
@@ -16,10 +16,8 @@ exports.createRatingAndReview = async (req, res) => {
 
   try {
     // check user has purchased this course or not
-    // const isUserPurchased = await Course.findOne({
-    //   _id: courseId,
-    //   enrolledStudent: { $elemMatch: { userId } },
-    // });
+
+    // 1st method
     const isUserPurchased = await Course.findById(courseId);
 
     if (
@@ -34,6 +32,12 @@ exports.createRatingAndReview = async (req, res) => {
         message: "User is not registered with this Course",
       });
     }
+
+    // 2nd method
+    // const isUserPurchased = await Course.findOne({
+    //   _id: courseId,
+    //   enrolledStudent: { $elemMatch: { userId } },
+    // });
 
     // check if user has already reviewed or not
     const isUserReviewed = await RatingAndReview.findOne({

@@ -83,7 +83,7 @@ const EnrolledCourses = () => {
       }
 
       dispatch(setCredentialData(response?.data?.data));
-      toast.success("Courses successfully");
+      toast.success("Courses fetch successfully");
     } catch (error) {
       console.log("Fetching User Details............", error);
       toast.error(error?.response?.data?.message);
@@ -109,13 +109,13 @@ const EnrolledCourses = () => {
       </div>
     </div>
   ) : (
-    <div className="w-full h-full ml-[60px] m-2 sm:m-8 xl:m-16">
+    <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] m-2 sm:m-8 xl:m-16 relative">
       <div className="w-full flex items-center flex-col sm:justify-start sm:items-start gap-y-8">
         <h1 className="text-2xl sm:text-4xl text-richblack-5">
           Enrolled Courses
         </h1>
 
-        <div className="w-fit p-1 gap-x-2 sm:gap-x-4 rounded-full bg-richblack-800 text-richblack-200 flex justify-between items-center font-medium ">
+        {credentialData?.courses?.length > 0 && <div className="w-fit p-1 gap-x-2 sm:gap-x-4 rounded-full bg-richblack-800 text-richblack-200 flex justify-between items-center font-medium ">
           {tabsName.map((element) => {
             return (
               <div
@@ -129,8 +129,9 @@ const EnrolledCourses = () => {
               </div>
             );
           })}
-        </div>
+        </div>}
       </div>
+      {credentialData?.courses?.length > 0 ? <>
       <div className="w-full rounded-t-lg mt-8 text-richblack-50 font-medium hidden lg:flex justify-between items-center bg-richblack-700 p-4">
         <div className="w-[55%]">Course Name</div>
         <div className="w-1/5">Durations</div>
@@ -192,6 +193,7 @@ const EnrolledCourses = () => {
           </div>
         ))}
       </div>
+      </> : <h1 className="text-center text-2xl text-richblack-100 absolute top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%]">No courses Enrolled</h1>}
     </div>
   );
 };
