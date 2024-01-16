@@ -30,7 +30,6 @@ import AddCourses from "./pages/instructorPage/AddCourses";
 // student page
 import EnrolledCourses from "./pages/studentPage/EnrolledCourses";
 import ViewCourse from "./pages/studentPage/ViewCourse";
-import PurchasedHistory from "./pages/studentPage/PurchasedHistory";
 import Cart from "./pages/studentPage/Cart";
 
 // page for logged users
@@ -155,14 +154,6 @@ const appRouter = createBrowserRouter([
             element: (
               <RouteForStudents>
                 <EnrolledCourses />
-              </RouteForStudents>
-            ),
-          },
-          {
-            path: "/dashboard/purchase-history",
-            element: (
-              <RouteForStudents>
-                <PurchasedHistory />
               </RouteForStudents>
             ),
           },

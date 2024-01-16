@@ -49,15 +49,15 @@ const ViewCourse = () => {
 
     console.log("UI rendered main..........");
 
-    return loading ? (<div className="w-screen min-h-[calc(100vh)] pt-[4rem] flex justify-center items-center">
-        <div className="spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>)
+    return loading ? (<div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] sm:ml-0 my-auto flex justify-center items-center">
+    <div className="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>)
         : (
             <div className='w-screen min-h-[calc(100vh)] pt-[4rem] bg-richblack-800 sm:bg-transparent flex flex-col-reverse justify-end sm:flex-row sm:justify-between sm:items-start'>
                 <CourseAccordionator setReviewModal={setReviewModal} />

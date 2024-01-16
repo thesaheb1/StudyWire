@@ -135,7 +135,7 @@ const Home = () => {
           <div className="w-full md:w-[45%]">
             <div>
               <p className={`my-2 text-richblack-500 text-left text-lg  `}>
-                The modern StudyNotion is the dictates its own terms. Today, to
+                The modern StudyWire is the dictates its own terms. Today, to
                 be a competitive specialist requires more than professional
                 skills.
               </p>

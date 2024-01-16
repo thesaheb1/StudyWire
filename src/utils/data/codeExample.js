@@ -9,6 +9,7 @@ export const htmlCode = `<!DOCTYPE html>
   <h1>StudyWire</h1>
 </body>
 </html>`;
+
 export const reactCode = `import React from 'react';
 import ReactDOM from 'react-dom/client';
 

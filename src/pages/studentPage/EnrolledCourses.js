@@ -99,15 +99,15 @@ const EnrolledCourses = () => {
   }, []);
 
   return loading ? (
-    <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] sm:ml-0 my-auto flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] sm:ml-0 my-auto flex justify-center items-center">
+  <div className="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
   ) : (
     <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] m-2 sm:m-8 xl:m-16 relative">
       <div className="w-full flex items-center flex-col sm:justify-start sm:items-start gap-y-8">

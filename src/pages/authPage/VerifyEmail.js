@@ -6,6 +6,7 @@ import { RxCountdownTimer } from "react-icons/rx";
 import { sendotp, signup } from "../../services/operations/authOperation";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../components/common/Loader";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState();
@@ -33,15 +34,7 @@ const VerifyEmail = () => {
   };
 
   return loading ? (
-    <div className="w-screen min-h-[calc(100vh)] flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Loader/>
   ) : (
     <div className="min-h-[calc(100vh)] grid place-items-center pt-[4rem]">
       <div className="max-w-[500px] p-4 lg:p-8">

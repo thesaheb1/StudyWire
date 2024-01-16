@@ -5,6 +5,7 @@ import { resetpassword } from "../../services/operations/authOperation";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
+import Loader from "../../components/common/Loader";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();
@@ -33,15 +34,7 @@ const UpdatePassword = () => {
   };
 
   return loading ? (
-    <div className="w-screen h-screen flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Loader/>
   ) : (
     <div className="grid min-h-[calc(100vh)] place-items-center pt-[4rem]">
       <div className="max-w-[500px] p-4 lg:p-8">

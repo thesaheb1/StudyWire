@@ -9,7 +9,8 @@ require("dotenv").config();
 //***************************************************************************//
 const logIn = async (req, res) => {
   // get data form client
-  const { email, password } = req.body;
+  const { password } = req?.body;
+  const email = req?.body?.email.toLowerCase();
 
   // validate data
   if (!email || !password) {

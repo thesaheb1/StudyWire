@@ -1,19 +1,12 @@
 import React from "react";
 import AuthTemplate from "../../components/core/login_&_signup/FormTemplate";
 import { useSelector } from "react-redux";
+import Loader from "../../components/common/Loader";
 
 function SignUp() {
-  const {loading} = useSelector(state => state.auth);
+  const { loading } = useSelector(state => state.auth);
   return loading ? (
-    <div className="w-full min-h-[calc(100vh)] flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Loader/>
   ) : (
     <div className="w-full min-h-[calc(100vh)] pt-[4rem]">
       <AuthTemplate

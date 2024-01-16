@@ -40,15 +40,15 @@ const Instructor = () => {
     0
   )
 
-  return (loading ? <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center">
-    <div className="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div> :
+  return (loading ? <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] sm:ml-0 my-auto flex justify-center items-center">
+  <div className="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div> :
     <div className="w-full max-h-[calc(100vh-4rem)] overflow-y-auto ml-[60px] p-4 sm:p-8 xl:p-16">
       <h1 className="pt-4 sm:pt-8 text-2xl sm:text-4xl text-richblack-5 text-center sm:text-left">Hello, {credentialData?.firstName}👋</h1>
       <p className="text-richblack-100 text-xl pt-2">Let's start something now...</p>
