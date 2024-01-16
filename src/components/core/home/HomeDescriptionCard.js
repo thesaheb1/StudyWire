@@ -17,7 +17,7 @@ const HomeDescriptionCard = ({
       </h1>
       <p className="my-2 text-richblack-50 text-lg font-bold">{paragraph}</p>
 
-      <div className="flex justify-start items-center gap-x-6 md:gap-x-12 mt-8">
+      <div className="flex justify-start items-center max-w-fit flex-wrap gap-2 lg:gap-6 mt-8">
         {/* button */}
         <CtaBtn
           color={"bgYellow"}

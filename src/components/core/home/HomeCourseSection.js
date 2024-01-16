@@ -20,24 +20,24 @@ const HomeCourseSection = () => {
     setActiveCourse(result[0].courses[0].heading);
   };
   return (
-    <div className="w-full md:w-8/12 flex flex-col justify-center items-center my-12 sm:my-20">
+    <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col justify-center items-center my-12 sm:my-20">
       {/* section Heading */}
-      <h1 className="text-3xl text-richblack-5 md:text-4xl font-inter font-bold text-left">
+      <h1 className="text-3xl text-richblack-5 md:text-4xl font-inter font-bold text-left sm:text-center w-full">
       Unlock the <FancyHeading text={"Power of Code"} />
       </h1>
-      <p className="my-2 text-richblack-50 text-center text-lg font-bold">{"Learn to Build Anything You Can Imagine"}</p>
+      <p className="my-2 text-richblack-50 text-left sm:text-center text-lg font-bold w-full">{"Learn to Build Anything You Can Imagine"}</p>
 
       {/* Course Tabs */}
       <HomeCourseTab setmyCard={setmyCard} activeTab={activeTab} />
 
       {/* Courses card */}
-      <div className="flex relative flex-col justify-center items-center z-10">
+      <div className="flex relative flex-col justify-center items-center z-10 mt-12">
         <HomeCourseCard
           courses={courses}
           activeCourse={activeCourse}
           setActiveCourse={setActiveCourse}
         />
-        <div className="bgLight w-screen absolute z-[-10] top-[80%] md:top-[45%] flex flex-col justify-end items-center h-[350px] pb-8">
+        <div className="bgLight w-screen absolute z-[-10] bottom-[-15%] lg:bottom-[-23%] flex flex-col justify-end items-center h-[350px] pb-8">
         </div>
       </div>
     </div>

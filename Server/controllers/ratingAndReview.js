@@ -87,7 +87,17 @@ exports.createRatingAndReview = async (req, res) => {
 };
 
 exports.getAverageRating = async (req, res) => {
-  const { courseId } = req.body;
+  const { courseId } = req?.body;
+
+  console.log('Average rating......',courseId);
+
+  if(!courseId){
+    return res.status(422).json({
+      status: false,
+      statusCode: 422,
+      Message: "Missing required Fields",
+    });
+  }
 
   try {
     const averageRatingResult = await RatingAndReview.aggregate([
@@ -119,6 +129,7 @@ exports.getAverageRating = async (req, res) => {
       statusCode: 404,
       message: "0 Rating",
     });
+
   } catch (error) {
     return res.status(500).json({
       status: false,

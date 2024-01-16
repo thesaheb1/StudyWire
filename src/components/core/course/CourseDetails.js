@@ -11,13 +11,15 @@ import {
 } from "react-icons/ti"
 
 
-import { fetchCourseDetails } from "../../../services/operations/courseOperation"
+import { fetchAverageRating, fetchCourseDetails } from "../../../services/operations/courseOperation"
 import CourseDetailsCard from "./CourseDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
 import { BuyCourse } from "../../../services/operations/paymentOperation.";
 import ConfirmationModal from "../../common/ConfirmationModal";
 import { ACCOUNT_TYPE } from "../../../utils/data/constants";
 import toast from "react-hot-toast";
+import { formatDate } from "../../../services/formatDate";
+import Loader from "../../common/Loader";
 
 
 
@@ -30,7 +32,8 @@ function CourseDetails() {
   const { courseId } = useParams()
   const { credentialData, token } = useSelector(state => state.auth)
 
-  const [response, setResponse] = useState(null)
+  const [course, setCourse] = useState(null)
+  const [rating, setRating] = useState(0)
   const [openTab, setOpenTab] = useState(true);
   const [loading, setLoading] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(null)
@@ -43,7 +46,7 @@ function CourseDetails() {
     let totalTime = 0;
 
     // Iterate through each section
-    response?.courseContent?.forEach((section) => {
+    course?.courseContent?.forEach((section) => {
       // Iterate through each subsection in the section
       section?.subSection?.forEach((item) => {
         // Add the time duration to the total time
@@ -58,7 +61,7 @@ function CourseDetails() {
 
   function getTotalLecture() {
     let lectures = 0
-    response?.courseContent?.forEach((section) => {
+    course?.courseContent?.forEach((section) => {
       lectures += section?.subSection?.length || 0
     })
 
@@ -72,8 +75,14 @@ function CourseDetails() {
     ; (async () => {
       try {
         setLoading(true)
-        const res = await fetchCourseDetails({ courseId });
-        setResponse(res?.data)
+        const courseResponse = await fetchCourseDetails({courseId});
+
+        const ratingResponse = await fetchAverageRating({courseId});
+        console.log(ratingResponse)
+
+        if (courseResponse) {
+          setCourse(courseResponse?.data)
+        }
       } catch (error) {
         console.log("Could not fetch Course Details")
       }
@@ -94,7 +103,7 @@ function CourseDetails() {
     setTotalDuration(getTotalTimeDuration());
 
     // eslint-disable-next-line
-  }, [response])
+  }, [course])
 
 
   const handleBuyCourse = () => {
@@ -110,7 +119,7 @@ function CourseDetails() {
 
       return
     }
-    if(credentialData?.accountType === ACCOUNT_TYPE.STUDENT){
+    if (credentialData?.accountType === ACCOUNT_TYPE.STUDENT) {
 
       BuyCourse(token, [courseId], credentialData, navigate, dispatch)
       return
@@ -121,29 +130,21 @@ function CourseDetails() {
 
   }
 
-  return loading ? (<div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
-    <div className="spinner">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>) :
+  return loading ? (<Loader />) :
     (<div className="w-full min-h-[calc(100vh-4rem)] pt-[4rem]">
       <div className="w-full bg-richblack-800 flex flex-col justify-start items-start">
         <div className="w-8/12 mx-auto relative">
           <div className="w-[60%]">
             <div className="flex flex-col justify-center items-start gap-y-4 my-10">
               <h1 className="font-bold text-richblack-5 text-4xl">
-                {response?.courseName}
+                {course?.courseName}
               </h1>
-              <p className="text-richblack-200 text-lg">{response?.courseDescription}</p>
+              <p className="text-richblack-200 text-lg">{course?.courseDescription}</p>
               <div className="text-richblack-400 font-medium flex justify-start items-center gap-x-4">
                 <span className="text-yellow-50 text-base font-bold pt-1">4.5</span>
                 <ReactStars
                   count={5}
-                  value={4.5}
+                  value={rating}
                   edit={false}
                   size={24}
                   color="#585D69"
@@ -154,19 +155,19 @@ function CourseDetails() {
                   fullIcon={<TiStarFullOutline />}
                 />{" "}
                 <div className="text-richblack-50 font-normal flex gap-x-4">
-                  <p>(20 Ratings)</p>
-                  <p> 332,402 students</p>
+                  <p>({course?.ratingAndReview.length} Ratings)</p>
+                  <p> {course?.enrolledStudent?.length} students</p>
                 </div>
               </div>
               <div className="text-richblack-50 font-medium flex flex-col gap-y-2">
-                <p className="text-richblack-50 font-normal"> Created by : {response?.instructor?.firstName.toUpperCase() + " " + response?.instructor?.lastName.toUpperCase()}</p>
-                <div className="flex justify-center items-center gap-x-4"><p>Created At : 12/2023</p> <div className="flex justify-center items-center gap-x-2"><MdLanguage className="text-xl" /> <p>{response?.courseLanguage}</p></div></div>
+                <p className="text-richblack-50 font-normal"> Created by : {course?.instructor?.firstName.toUpperCase() + " " + course?.instructor?.lastName.toUpperCase()}</p>
+                <div className="flex justify-center items-center gap-x-4"><p>Created At : {formatDate(course?.createdAt)}</p> <div className="flex justify-center items-center gap-x-2"><MdLanguage className="text-xl" /> <p>{course?.courseLanguage}</p></div></div>
               </div>
             </div>
           </div>
           <div className="absolute top-10 right-0">
             <CourseDetailsCard
-              course={response}
+              course={course}
               handleBuyCourse={handleBuyCourse}
               setConfirmationModal={setConfirmationModal}
             />
@@ -179,7 +180,7 @@ function CourseDetails() {
           <div className="my-8 border border-richblack-600 text-richblack-5 p-8">
             <p className="text-3xl font-semibold">What you'll learn</p>
             <div className="mt-5">
-              {response?.whatYouWillLearn}
+              {course?.whatYouWillLearn}
             </div>
           </div>
           {/* Course Details Accordion */}
@@ -188,7 +189,7 @@ function CourseDetails() {
               <div>
                 <p className="text-3xl text-richblack-5 font-medium">Course Content</p>
                 <div className="flex justify-start gap-x-2">
-                  <p className="text-base text-richblack-5 font-medium my-2">{response?.courseContent?.length} Section(s)</p>
+                  <p className="text-base text-richblack-5 font-medium my-2">{course?.courseContent?.length} Section(s)</p>
                   <p className="text-base text-richblack-5 font-medium my-2">{totalLectures} lecture(s)</p>
                   <p className="text-base text-richblack-5 font-medium my-2">{Math.round(totalDuration * 10) / 10}Min Content length</p>
                 </div>
@@ -196,7 +197,7 @@ function CourseDetails() {
               <p onClick={() => setOpenTab(!openTab)} className="text-yellow-50 text-base cursor-pointer">{openTab ? "Close" : "Open"} all sections</p>
             </div>
             {
-              response?.courseContent?.map((section) => (
+              course?.courseContent?.map((section) => (
                 <details open={openTab} key={section?._id}>
                   <summary className="px-6 py-6 bg-richblack-800 border-[1px] border-richblack-600 cursor-pointer">
                     <div className="inline-flex justify-between items-center">
@@ -223,17 +224,17 @@ function CourseDetails() {
             <div className="flex items-center gap-4 py-4">
               <img
                 src={
-                  response?.instructor.image
-                    ? response?.instructor.image
-                    : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.instructor?.firstName} ${response?.instructor?.lastName}`
+                  course?.instructor.image
+                    ? course?.instructor.image
+                    : `https://api.dicebear.com/5.x/initials/svg?seed=${course?.instructor?.firstName} ${course?.instructor?.lastName}`
                 }
                 alt="Author"
                 className="h-14 w-14 rounded-full object-cover"
               />
-              <p className="text-lg">{`${response?.instructor?.firstName?.toUpperCase()} ${response?.instructor?.lastName.toUpperCase()}`}</p>
+              <p className="text-lg">{`${course?.instructor?.firstName?.toUpperCase()} ${course?.instructor?.lastName.toUpperCase()}`}</p>
             </div>
             <p className="text-richblack-50">
-              {response?.instructor?.additionalDetails?.about}
+              {course?.instructor?.additionalDetails?.about}
             </p>
           </div>
         </div>

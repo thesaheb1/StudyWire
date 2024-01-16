@@ -29,7 +29,7 @@ import ReviewSlider from "../../components/common/ReviewSlider";
 
 const Home = () => {
   return (
-    <div className="Home px-4 w-full flex flex-col justify-start items-center pt-[4rem]">
+    <div className="Home px-4 w-full min-h-[calc(100vh)] flex flex-col justify-start items-center pt-[4rem]">
       <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col justify-center items-center my-12 sm:my-20">
         <Link
           to="/signup"
@@ -41,10 +41,10 @@ const Home = () => {
           <FaArrowRight className="animate-left-right" />
         </Link>
         <div className="w-full md:w-[80%] mx-auto flex flex-col justify-center items-center mt-8">
-          <h1 className="text-3xl text-richblack-5 md:text-4xl font-inter font-bold">
+          <h1 className="text-3xl text-richblack-5 md:text-4xltext-left sm:text-center font-inter font-bold">
             Empower Your Future with <FancyHeading text={"Coding Skills"} />
           </h1>
-          <p className="my-2 text-richblack-50 text-lg font-bold">
+          <p className="my-2 text-richblack-50 text-lg text-left sm:text-center font-bold">
             With our online coding courses, you can learn at your own pace, from
             anywhere in the world, and get access to a wealth of resources,
             including hands-on projects, quizzes, and personalized feedback from
@@ -79,9 +79,9 @@ const Home = () => {
           <div className="w-full aspect-video rounded-md bg-[#FFD60A] shadow-[0px_0px_40px_10px_#FFD60A] absolute z-[-1] top-[10px] left-[10px] scale-up-center"></div>
         </div>
       </div>
-      <div className=" w-full md:w-8/12 flex flex-col justify-center items-center gap-y-12 my-12 sm:my-20">
-        <div className="w-full flex flex-col md:flex-row justify-between items-center md:items-start flex-wrap gap-y-8 md:gap-y-0">
-          <div className="w-full md:w-[43%]">
+      <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col justify-center items-center gap-y-12 my-12 sm:my-20">
+        <div className="w-full flex flex-col lg:flex-row justify-between items-center md:items-start gap-8 lg:gap-y-0">
+          <div className="w-full lg:w-[43%]">
             {/* description 1 */}
             <HomeDescriptionCard
               btnText1={"Try it Yourself"}
@@ -94,13 +94,13 @@ const Home = () => {
               }
             />
           </div>
-          <div className="w-full md:w-[43%] relative z-20">
+          <div className="w-full lg:w-[43%] relative z-20">
             <div className="shadow-[0px_0px_200px_70px_#12D8FA] absolute -z-10 bottom-1/2 right-1/2"></div>
             <CodeBlock code={htmlCode} color={"textBlue"} />
           </div>
         </div>
-        <div className="w-full flex flex-col md:flex-row-reverse justify-between items-center md:items-start flex-wrap gap-y-8 md:gap-y-0">
-          <div className="w-full md:w-[43%]">
+        <div className="w-full flex flex-col lg:flex-row-reverse justify-between items-center md:items-start gap-y-8 lg:gap-y-0">
+          <div className="w-full lg:w-[43%]">
             {/* description 2 */}
             <HomeDescriptionCard
               btnText1={"Continue Lesson"}
@@ -114,7 +114,7 @@ const Home = () => {
               paragraphAlign={"textAlignLeft"}
             />
           </div>
-          <div className="w-full md:w-[43%] relative z-20">
+          <div className="w-full lg:w-[43%] relative z-20">
             <div className="shadow-[0px_0px_200px_70px_#FFD60A] absolute -z-10 bottom-1/2 right-1/2"></div>
             <CodeBlock code={reactCode} color={"textYellow"} />
           </div>
@@ -124,9 +124,9 @@ const Home = () => {
       <HomeCourseSection />
       {/* timeline section */}
       <div className="w-screen flex flex-col justify-center items-center bg-white mainBack py-12 px-4 md:p-0">
-        <div className="w-full md:w-8/12 flex flex-col md:flex-row justify-between items-start">
-          <div className="w-full md:w-[45%] my-2 z-50">
-            <h1 className="text-richblack-900 text-3xl md:text-4xl text-left font-inter font-bold">
+        <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col md:flex-row justify-between flex-wrap items-start z-50">
+          <div className="w-full md:w-[45%] my-2">
+            <h1 className="text-richblack-900 text-3xl md:text-4xl text-left sm:text-center font-inter font-bold">
               Get the skills you need for a{" "}
               <FancyHeading text={"job that is in demand."} />
             </h1>
@@ -134,7 +134,7 @@ const Home = () => {
 
           <div className="w-full md:w-[45%]">
             <div>
-              <p className={`my-2 text-richblack-500 text-left text-lg  `}>
+              <p className={`my-2 text-richblack-500 text-left sm:text-center text-lg`}>
                 The modern StudyWire is the dictates its own terms. Today, to
                 be a competitive specialist requires more than professional
                 skills.
@@ -144,13 +144,13 @@ const Home = () => {
               <CtaBtn
                 color={"bgYellow"}
                 arrow={false}
-                hoverOnShadow={"hover:shadow-[0px_0px_40px_0px_#12D8FA]"}
+                hoverOnShadow={"hover:shadow-[0px_0px_40px_0px_#FFD60A]"}
                 text={"Learn More"}
               />
             </div>
           </div>
         </div>
-        <div className="w-full md:w-8/12 text-white flex flex-col md:flex-row justify-between items-center my-12 sm:my-20">
+        <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 text-white flex flex-col md:flex-row justify-between items-center my-12 sm:my-20">
           <div className="w-full md:w-[40%] h-full flex flex-col justify-between items-start mx-auto">
             {TimeLine.map((item) => {
               return (
@@ -181,17 +181,17 @@ const Home = () => {
           <div className="w-full md:w-[50%] relative z-10">
             <img
               src={TimelineImage}
-              alt=""
-              className="bg-white shadow-[15px_15px_0_0] shadow-richblack-5 rounded-md"
+              alt="TimelineImage"
+              className="bg-white shadow-[15px_15px_0_0] w-full aspect-auto shadow-richblack-5 rounded-md"
             />
-            <div className="absolute top-0 left-0 md:left-[50%] h-fit md:top-[87%] md:-translate-x-1/2 z-20 flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center p-4 md:p-8 bg-caribbeangreen-700">
-              <div className="flex justify-between items-center gap-x-8 md:border-r-[1px] md:px-8 md:border-caribbeangreen-500">
+            <div className="absolute top-0 left-0 md:left-[50%] h-fit md:top-[87%] md:-translate-x-1/2 z-20 flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center p-4 lg:p-8 bg-caribbeangreen-700">
+              <div className="flex justify-between items-center gap-x-8 md:border-r-[1px] md:pr-4 lg:px-8 md:border-caribbeangreen-500">
                 <p className="text-3xl font-bold">10</p>
                 <p className="text-sm text-caribbeangreen-300">
                   YEARS EXPERIENCES
                 </p>
               </div>
-              <div className="flex justify-between items-center gap-x-8 md:px-8 ">
+              <div className="flex justify-between items-center gap-x-8 md:pl-4 lg:px-8 ">
                 <p className="text-3xl font-bold">250</p>
                 <p className="text-sm text-caribbeangreen-300">
                   TYPES OF COURSES
@@ -200,11 +200,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-8/12 flex justify-between items-start">
-          <div className="w-full md:w-[75%] mx-auto flex flex-col justify-center items-center mt-8">
-            <h1 className="text-richblack-900 text-3xl md:text-4xl text-left font-inter font-bold">
+        <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex justify-between items-start">
+          <div className="w-full mx-auto flex flex-col justify-center items-center mt-8">
+            <h1 className="text-richblack-900 text-3xl md:text-4xl text-left sm:text-center font-inter font-bold">
               Your swiss knife for{" "}
-              <span className="gradient">learning any language</span>
+              <FancyHeading text={"learning any language."} />
             </h1>
             <p
               className={`my-2 text-richblack-500 text-left sm:text-center text-lg  `}
@@ -213,10 +213,10 @@ const Home = () => {
               languages realistic voice-over, progress tracking, custom schedule
               and more.
             </p>
-            <div className="flex flex-col md:flex-row justify-center items-center mt-4 md:mt-0">
-              <img src={knowYourProgress} alt="" />
-              <img src={compareWithOthers} alt="" className="-mx-32" />
-              <img src={planYourLesson} alt="" />
+            <div className="w-full flex justify-center items-center flex-wrap my-8 md:mt-0 overflow-hidden">
+              <img src={knowYourProgress} alt="knowYourProgress"  className="w-[400px]" />
+              <img src={compareWithOthers} alt="compareWithOthers" className="w-[400px] -mx-24" />
+              <img src={planYourLesson} alt="planYourLesson" className="w-[400px]" />
             </div>
             <div className="md:mb-8">
               <CtaBtn
@@ -230,7 +230,7 @@ const Home = () => {
         </div>
       </div>
       {/* become an Instructor section */}
-      <div className="w-full md:w-8/12 flex flex-col md:flex-row gap-x-8 gap-y-4 md:gap-y-0 justify-between items-center my-12 sm:my-20">
+      <div className="w-full sm:w-[90%] lg:w-4/5 xl:w-8/12 flex flex-col md:flex-row gap-x-8 gap-y-4 md:gap-y-0 justify-between items-center my-12 sm:my-20">
         <div className="w-full md:[30%]">
           <img
             src={instructor}

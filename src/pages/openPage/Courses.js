@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCourseData, setFilteredData, setLoading } from "../../redux/feature/courseSlice";
 import { useLocation } from "react-router-dom";
 import ReviewSlider from "../../components/common/ReviewSlider";
+import Loader from "../../components/common/Loader";
 
 const Courses = () => {
   const { filteredData, loading } = useSelector(state => state.course)
@@ -62,17 +63,8 @@ const Courses = () => {
 
 
 
-  return loading ? (
-    <div className="w-full min-h-[calc(100vh-4rem)] my-auto flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>) : (
-    <div className="w-full min-h-[calc(100vh-5rem)] px-8 pt-[6rem]">
+  return loading ? (<Loader/>) : (
+    <div className="w-full px-4 pt-[6rem]">
       <div className="w-full md:w-[90%] xl:w-4/5 2xl:w-8/12 mx-auto flex flex-col justify-start items-center">
         <div className="sm:my-8">
           <p className="text-lg sm:text-xl lg:text-2xl flex justify-around items-center font-[900] text-richblack-5/40 tracking-[4px] sm:tracking-[15px] xl:tracking-[20px]">

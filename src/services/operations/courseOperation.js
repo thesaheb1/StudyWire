@@ -155,6 +155,22 @@ export const fetchCourseDetails = async (data) => {
   return result;
 };
 
+// fetch Course Details
+export const fetchAverageRating = async (data) => {
+  let result = null;
+  try {
+    const response = await apiConnector("GET", course.get_average_rating_api, data);
+    if (!response?.data?.status) {
+      throw new Error(response);
+    }
+    result = response?.data?.averageRating;
+  } catch (error) {
+    console.log("AVERAGE RATING API ERROR............", error);
+    console.log(error?.response?.data?.message);
+  }
+  return result;
+};
+
 // mark a lecture as complete
 export const markLectureAsComplete = async (data, token) => {
   let result = false;

@@ -6,6 +6,7 @@ import BannerImage2 from "../../assets/Images/aboutus2.webp"
 import BannerImage3 from "../../assets/Images/aboutus3.webp"
 import { Link } from "react-router-dom"
 import ReviewSlider from "../../components/common/ReviewSlider"
+import ContactUs from "../../components/common/ContactUs"
 
 
 const Stats = [
@@ -59,7 +60,7 @@ const LearningGridArray = [
 const About = () => {
 
   return (
-    <div className="pt-[4rem] px-4">
+    <div className="pt-[1rem] sm:pt-[2rem] px-4">
       <section className="bg-richblack-700">
         <div className="relative mx-auto flex w-full sm:w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
           <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
@@ -185,7 +186,7 @@ const About = () => {
         </div>
       </div>
       <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
-        <div className="grid mx-auto w-[300px] md:w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
+        <div className="grid mx-auto w-full sm:w-[300px] md:w-fit grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-12">
           {LearningGridArray.map((card, i) => {
             return (
               <div
@@ -233,11 +234,20 @@ const About = () => {
             );
           })}
         </div>
-        {/* <ContactFormSection /> */}
+
+      </section>
+
+      <section className="mx-auto mt-20 flex w-full sm:w-[500px] flex-col justify-center items-center gap-8 text-white"
+      >
+        <div>
+          <h2 className="text-center text-4xl font-medium ring-richblack-5 mb-2">Get in Touch</h2>
+          <p className="text-base text-richblack-100">We'd love to here for you, Please fill out this form.</p>
+        </div>
+        <ContactUs />
       </section>
 
       {/* review section */}
-      <ReviewSlider/>
+      <ReviewSlider />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { forgotpassword } from "../../services/operations/authOperation";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Loader from "../../components/common/Loader";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -23,15 +24,7 @@ const ForgotPassword = () => {
     dispatch(forgotpassword(email, setEmailSent));
   }
   return loading ? (
-    <div className="w-screen min-h-[calc(100vh-4rem)] flex justify-center items-center pt-[4rem]">
-      <div className="spinner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Loader/>
   ) : (
     <div className="grid min-h-[calc(100vh)] place-items-center pt-[4rem]">
       <div className="max-w-[500px] p-4 lg:p-8">

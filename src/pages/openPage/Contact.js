@@ -31,7 +31,7 @@ const contactDetails = [
 
 const Contact = () => {
   return (
-    <div className="pt-[4rem] px-4 w-full">
+    <div className="pt-[1rem] sm:pt-[2rem] px-4 w-full">
       <div className="mx-auto mt-20 flex w-full sm:w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
         {/* Contact Details */}
         <div className="lg:w-[40%]">

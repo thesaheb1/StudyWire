@@ -23,6 +23,7 @@ export const course = {
 
     // Rating And Review api's
     get_all_rating_and_review_api: BASE_URL + "/course/get-all-rating-and-review",
+    get_average_rating_api: BASE_URL + "/course/get-average-rating",
     create_course_review_api: BASE_URL + "/course/create-rating-and-review",
 
     // Update Course Progress api's
