@@ -52,6 +52,11 @@ import RouteForStudents from "./authorization/RouteForStudents";
 import RouteForInstructor from "./authorization/RouteForInstructor";
 import CourseDetails from "./components/core/course/CourseDetails";
 
+// redux
+import { Provider } from "react-redux";
+import store from "./redux/store/store";
+import { Toaster } from "react-hot-toast";
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -169,7 +174,10 @@ const appRouter = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <RouterProvider router={appRouter}>
-    <App />
-  </RouterProvider>
+  <Provider store={store}>
+    <RouterProvider router={appRouter}>
+      <App />
+      <Toaster />
+    </RouterProvider>
+  </Provider>
 );
