@@ -32,7 +32,6 @@ function ReviewSlider() {
             )
             if (response?.data?.status) {
                 setReviews(response?.data?.data)
-                console.log("reviews....... ", response?.data?.data);
             }
             setLoading(false);
         })()

@@ -1,13 +1,13 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { removeFromCart } from "../../../redux/feature/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const CartList = ({ data }) => {
+const CartList = ({ data, index }) => {
+  const {totalItems} = useSelector(state => state.cart)
   const dispatch = useDispatch();
   return (
-    <div className="w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pb-8 border-b-[1px] border-richblack-700">
-      {/* <div className="flex gap-x-4"> */}
+    <div className={`w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pb-8 ${!(index === totalItems - 1) && "border-b-[1px] border-richblack-700"} `}>
         <div className="w-full flex justify-between lg:justify-start gap-x-4">
           <img
             className="rounded-lg w-full sm:w-auto sm:max-h-[100px] aspect-video"
@@ -51,7 +51,6 @@ const CartList = ({ data }) => {
           </button>
           <p className="mt-8 text-2xl font-bold text-yellow-50">Rs {data?.price}</p>
         </div>
-      {/* </div> */}
     </div>
   );
 };

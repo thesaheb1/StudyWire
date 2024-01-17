@@ -48,11 +48,11 @@ const Cart = () => {
         {totalItems} courses in Cart
       </p>
       <div className="flex justify-between items-start flex-wrap sm:flex-nowrap gap-8 mt-8">
-        <div className="w-full sm:min-w-[330px] border-[1px] border-richblack-700 rounded-lg max-h-[calc(100vh-17rem)] overflow-y-auto flex flex-col justify-start items-start p-4 gap-y-8">
-          {cart?.map((c) => (
-            <CartList data={c} key={c?._id} />
+        {totalItems > 0 ? (<div className="w-full sm:min-w-[330px] border-[1px] border-richblack-700 rounded-lg max-h-[calc(100vh-17rem)] overflow-y-auto flex flex-col justify-start items-start p-4 gap-y-8">
+          {cart?.map((c, index) => (
+            <CartList data={c} key={c?._id} index={index} />
           ))}
-        </div>
+        </div>) : (<p className="w-full text-center text-xl font-medium text-richblack-300">No Courses in cart</p>)}
         {totalItems > 0 && <div className="w-full lg:w-fit lg:min-w-[300px] bg-richblack-800 border-2 border-richblack-700 rounded-lg flex flex-col justify-between items-start gap-y-24 p-8">
           <div className="border-b-[1px] border-richblack-700">
             <h3 className="text-3xl ring-richblack-5 font-medium">Your cart</h3>
