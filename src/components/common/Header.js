@@ -34,6 +34,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { totalItems } = useSelector(state => state.cart)
   const { credentialData } = useSelector((state) => state.auth);
   const [dropdown, setDropDown] = useState(false);
   const [showModal, setShowModal] = useState(null);
@@ -110,9 +111,9 @@ const Header = () => {
                   className="text-[#12d7fad6] relative hover:text-[#12D8FA] cursor-pointer text-[1.7rem] mx-2 transition-all duration-200"
                 >
                   <FaCartShopping />
-                  <div className="w-[20px] aspect-square absolute -top-2 -right-2 flex justify-center items-center animate-bounce bg-yellow-50 rounded-full text-sm font-bold text-black">
-                    9
-                  </div>
+                  {totalItems > 0 && <div className="w-[20px] aspect-square absolute -top-2 -right-2 flex justify-center items-center animate-bounce bg-yellow-50 rounded-full text-sm font-bold text-black">
+                    {totalItems}
+                  </div>}
                 </Link>
               )}
               <img

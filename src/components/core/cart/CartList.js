@@ -1,56 +1,57 @@
 import React from "react";
-import { TiStarFullOutline } from "react-icons/ti"; 
-import { TiStarHalfOutline } from "react-icons/ti"; 
-import { TiStarOutline } from "react-icons/ti";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import ReactStars from "react-rating-stars-component";
+import { removeFromCart } from "../../../redux/feature/cartSlice";
+import { useDispatch } from "react-redux";
 
-const CartList = () => {
+const CartList = ({ data }) => {
+  const dispatch = useDispatch();
   return (
-    <div className="w-fit pb-8 border-b-[1px] border-richblack-700">
-      <div className="flex gap-x-4">
-        <img
-          className="rounded-lg w-[250px] aspect-video"
-          src="https://thecodex.me/static/5c02153876c8f9c5740350364990a18a/ee604/Java_Thumbnail_java_875e0d6a31.png"
-          alt=""
-        />
-        <div className="w-[300px] flex flex-col justify-between items-start">
-          <h2 className="text-lg font-medium">
-            The Complete JAVA Bootcamp From Zero to Hero in Python
-          </h2>
-          <p className="text-richblack-300 font-medium">
-            by - <span className="gradient">SAHEB</span>
-          </p>
-          <p className="text-richblack-400 font-medium flex justify-start items-center gap-x-4">
-          <span className="text-yellow-50 text-base font-bold pt-1">4.5</span>
-            <ReactStars
-              count={5}
-              value={4.5}
-              edit={false}
-              size={24}
-              color="#585D69"
-              activeColor="#FFD60A"
-              isHalf={true}
-              emptyIcon={<TiStarOutline />}
-              halfIcon={<TiStarHalfOutline />}
-              fullIcon={<TiStarFullOutline />}
-            />{" "}
-            <span className="pt-1">(20 Ratings)</span>
-          </p>
-          <p className="text-richblack-300 font-medium">
-            Total Courses • Lesson • Beginner
-          </p>
-        </div>
-        <div>
-          <div className="flex justify-center items-center gap-x-2 px-4 py-3 rounded-lg border-2 border-pink-200 bg-pink-200/20 cursor-pointer hover:bg-pink-200/30 transition-all duration-200">
-            <div className="text-pink-200 text-xl font-bold">
+    <div className="w-full flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pb-8 border-b-[1px] border-richblack-700">
+      {/* <div className="flex gap-x-4"> */}
+        <div className="w-full flex justify-between lg:justify-start gap-x-4">
+          <img
+            className="rounded-lg w-full sm:w-auto sm:max-h-[100px] aspect-video"
+            src={data?.thumbnail}
+            alt="courseImg"
+          />
+          <div className="hidden sm:block lg:hidden">
+          <button onClick={() => dispatch(removeFromCart(data?._id))} className="flex justify-center items-center gap-x-2 px-2 py-1 rounded-lg border-2 border-pink-200 bg-pink-200/20 hover:bg-pink-200/30 transition-all duration-200">
+            <div className="text-pink-200 text-lg font-bold">
               <RiDeleteBin6Line />
             </div>
             <p className="text-pink-200 text-base font-medium">Remove</p>
-          </div>
-          <p className="mt-8 text-3xl font-bold text-yellow-50">Rs 1,500</p>
+          </button>
+          <p className="mt-4 lg:mt-8 text-2xl font-bold text-yellow-50">Rs {data?.price}</p>
         </div>
-      </div>
+          <div className="hidden lg:flex flex-col justify-start items-start">
+            <h2 className="text-lg font-medium">
+              {data?.courseName}
+            </h2>
+            <p className="text-richblack-200 text-base py-2">{data?.courseDescription?.slice(0, 50)}...</p>
+            <p className="text-richblack-50 font-medium">
+              by - <span className="gradient">{data?.instructor?.firstName} {data?.instructor?.lastName}</span>
+            </p>
+          </div>
+        </div>
+        <div className="lg:hidden flex flex-col justify-start items-start">
+            <h2 className="text-lg font-medium">
+              {data?.courseName}
+            </h2>
+            <p className="text-richblack-200 text-base py-2">{data?.courseDescription?.slice(0, 50)}...</p>
+            <p className="text-richblack-50 font-medium">
+              by - <span className="gradient">{data?.instructor?.firstName} {data?.instructor?.lastName}</span>
+            </p>
+          </div>
+        <div className="w-full flex flex-row-reverse justify-between items-baseline sm:w-fit sm:hidden lg:block">
+          <button onClick={() => dispatch(removeFromCart(data?._id))} className="flex justify-center items-center gap-x-2 px-2 py-1 rounded-lg border-2 border-pink-200 bg-pink-200/20 hover:bg-pink-200/30 transition-all duration-200">
+            <div className="text-pink-200 text-lg font-bold">
+              <RiDeleteBin6Line />
+            </div>
+            <p className="text-pink-200 text-base font-medium">Remove</p>
+          </button>
+          <p className="mt-8 text-2xl font-bold text-yellow-50">Rs {data?.price}</p>
+        </div>
+      {/* </div> */}
     </div>
   );
 };

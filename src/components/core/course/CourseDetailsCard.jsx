@@ -6,12 +6,13 @@ import { FaShareSquare } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { ACCOUNT_TYPE } from "../../../utils/data/constants"
-import { addToCart } from "../../../redux/feature/cartSlice"
+import { addToCart, removeFromCart } from "../../../redux/feature/cartSlice"
 
 
 function CourseDetailsCard({ course , handleBuyCourse, setConfirmationModal}) {
 
   const { credentialData, token } = useSelector(state => state.auth)
+  const { cart } = useSelector(state => state.cart)
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,8 +33,8 @@ function CourseDetailsCard({ course , handleBuyCourse, setConfirmationModal}) {
     setConfirmationModal({
       text1: "You are not logged in!",
       text2: "Please login to add To Cart",
-      btn1Text: "Login",
-      btn2Text: "Cancel",
+      btn1: "Login",
+      btn2: "Cancel",
       btn1Handler: () => navigate("/login"),
       btn2Handler: () => setConfirmationModal(null),
     })
@@ -68,9 +69,11 @@ function CourseDetailsCard({ course , handleBuyCourse, setConfirmationModal}) {
                 ? "Go To Course"
                 : "Buy Now"}
             </button>
-            <button onClick={handleAddToCart} className="bg-black py-2 rounded-lg text-richblack-5 text-lg font-medium">
+            {!(course?.enrolledStudent.includes(credentialData?._id)) && (cart?.some((c) => c?._id === course?._id) ? (<button onClick={() => dispatch(removeFromCart(course?._id))} className="bg-black py-2 rounded-lg text-richblack-5 text-lg font-medium">
+              Remove from cart
+            </button>) : (<button onClick={handleAddToCart} className="bg-black py-2 rounded-lg text-richblack-5 text-lg font-medium">
               Add to Cart
-            </button>
+            </button>))}
           </div>
           <div>
             <p className="pb-3 pt-6 text-center text-sm text-richblack-25">
