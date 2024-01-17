@@ -60,7 +60,7 @@ const LearningGridArray = [
 const About = () => {
 
   return (
-    <div className="pt-[1rem] sm:pt-[2rem] px-4">
+    <div className="pt-[1rem] sm:pt-[2rem]">
       <section className="bg-richblack-700">
         <div className="relative mx-auto flex w-full sm:w-11/12 max-w-maxContent flex-col justify-between gap-10 text-center text-white">
           <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
@@ -237,7 +237,7 @@ const About = () => {
 
       </section>
 
-      <section className="mx-auto mt-20 flex w-full sm:w-[500px] flex-col justify-center items-center gap-8 text-white"
+      <section className="mx-auto mt-20 flex w-full sm:w-[500px] flex-col justify-center items-center gap-8 text-white pb-8"
       >
         <div>
           <h2 className="text-center text-4xl font-medium ring-richblack-5 mb-2">Get in Touch</h2>
