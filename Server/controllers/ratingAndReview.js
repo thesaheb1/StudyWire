@@ -122,13 +122,16 @@ exports.getAverageRating = async (req, res) => {
         averageRating: averageRatingResult[0].averageRating,
         message: "Average Rating fetched Successfully",
       });
+    }else{
+      return res.status(200).json({
+        status: true,
+        statusCode: 200,
+        averageRating:0,
+        message: "0 Rating",
+      });
     }
 
-    return res.status(404).json({
-      status: false,
-      statusCode: 404,
-      message: "0 Rating",
-    });
+    
 
   } catch (error) {
     return res.status(500).json({

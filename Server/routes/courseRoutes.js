@@ -132,7 +132,7 @@ router.put(
 );
 
 //-------------------------|Get Average Rating And Review (Everyone)|--------------------------//
-router.get("/get-average-rating", getAverageRating);
+router.post("/get-average-rating", getAverageRating);
 
 //-------------------------|Get All Rating And Review (Everyone)|--------------------------//
 router.get("/get-all-rating-and-review", getAllRatingAndReviewed);
@@ -146,9 +146,6 @@ router.post("/create-category", AuthN, isAdmin, createCategory);
 
 //-------------------------|Get all Category (Everyone)|--------------------------//
 router.get("/get-all-category", getAllCategory);
-
-//-------------------------|Get selected Category (Everyone)|--------------------------//
-router.get("/get-selected-category", getSelectedCategory);
 
 //***************************************************************************//
 //                              Export Router                                //

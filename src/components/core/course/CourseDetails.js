@@ -75,11 +75,13 @@ function CourseDetails() {
     ; (async () => {
       try {
         setLoading(true)
-        const courseResponse = await fetchCourseDetails({courseId});
+        const ratingResponse = await fetchAverageRating({ courseId });
+        const courseResponse = await fetchCourseDetails({ courseId });
 
-        const ratingResponse = await fetchAverageRating({courseId});
-        console.log(ratingResponse)
 
+        if (ratingResponse) {
+          setRating(ratingResponse)
+        }
         if (courseResponse) {
           setCourse(courseResponse?.data)
         }
@@ -89,7 +91,7 @@ function CourseDetails() {
       setLoading(false);
     })()
 
-
+    // eslint-disable-next-line
   }, [courseId])
 
 
@@ -132,40 +134,42 @@ function CourseDetails() {
 
   return loading ? (<Loader />) :
     (<div className="w-full min-h-[calc(100vh-4rem)] pt-[4rem]">
-      <div className="w-full bg-richblack-800 flex flex-col justify-start items-start">
-        <div className="w-8/12 mx-auto relative">
-          <div className="w-[60%]">
-            <div className="flex flex-col justify-center items-start gap-y-4 my-10">
+      <div className="w-full bg-richblack-800 flex flex-col justify-start items-start lg:max-h-96 py-8">
+        <div className="w-full md:w-[90%] xl:w-4/5 2xl:w-8/12 mx-auto flex flex-col lg:flex-row items-center lg:justify-between lg:items-start gap-8">
+          <div className="w-full lg:max-w-[60%] px-4 md:px-0">
+            <div className="flex flex-col justify-center items-start flex-wrap gap-y-4 mb-4 sm:mb-10 mt-4">
               <h1 className="font-bold text-richblack-5 text-4xl">
                 {course?.courseName}
               </h1>
               <p className="text-richblack-200 text-lg">{course?.courseDescription}</p>
-              <div className="text-richblack-400 font-medium flex justify-start items-center gap-x-4">
-                <span className="text-yellow-50 text-base font-bold pt-1">4.5</span>
-                <ReactStars
-                  count={5}
-                  value={rating}
-                  edit={false}
-                  size={24}
-                  color="#585D69"
-                  activeColor="#FFD60A"
-                  isHalf={true}
-                  emptyIcon={<TiStarOutline />}
-                  halfIcon={<TiStarHalfOutline />}
-                  fullIcon={<TiStarFullOutline />}
-                />{" "}
-                <div className="text-richblack-50 font-normal flex gap-x-4">
+              <div className="text-richblack-400 font-medium flex justify-start items-center flex-wrap gap-2">
+                <div className="flex justify-start items-center gap-x-2">
+                  <span className="text-yellow-50 text-base font-bold pt-1">{rating}</span>
+                  <ReactStars
+                    count={5}
+                    value={rating}
+                    edit={false}
+                    size={24}
+                    color="#585D69"
+                    activeColor="#FFD60A"
+                    isHalf={true}
+                    emptyIcon={<TiStarOutline />}
+                    halfIcon={<TiStarHalfOutline />}
+                    fullIcon={<TiStarFullOutline />}
+                  />
+                </div>
+                <div className="text-richblack-50 font-normal flex gap-x-4 gap-y-2">
                   <p>({course?.ratingAndReview.length} Ratings)</p>
-                  <p> {course?.enrolledStudent?.length} students</p>
+                  <p> {course?.enrolledStudent?.length} students enrolled</p>
                 </div>
               </div>
               <div className="text-richblack-50 font-medium flex flex-col gap-y-2">
                 <p className="text-richblack-50 font-normal"> Created by : {course?.instructor?.firstName.toUpperCase() + " " + course?.instructor?.lastName.toUpperCase()}</p>
-                <div className="flex justify-center items-center gap-x-4"><p>Created At : {formatDate(course?.createdAt)}</p> <div className="flex justify-center items-center gap-x-2"><MdLanguage className="text-xl" /> <p>{course?.courseLanguage}</p></div></div>
+                <div className="flex justify-start flex-wrap items-center gap-x-4 gap-y-2"><p>Created At : {formatDate(course?.createdAt)}</p> <div className="flex justify-center items-center gap-x-2"><MdLanguage className="text-xl" /> <p>{course?.courseLanguage}</p></div></div>
               </div>
             </div>
           </div>
-          <div className="absolute top-10 right-0">
+          <div className="">
             <CourseDetailsCard
               course={course}
               handleBuyCourse={handleBuyCourse}
@@ -175,8 +179,8 @@ function CourseDetails() {
         </div>
       </div>
 
-      <div className="w-8/12 mx-auto">
-        <div className="w-[60%]">
+      <div className="w-full md:w-[90%] xl:w-4/5 2xl:w-8/12 mx-auto px-4 md:px-0">
+        <div className="w-full lg:w-[60%]">
           <div className="my-8 border border-richblack-600 text-richblack-5 p-8">
             <p className="text-3xl font-semibold">What you'll learn</p>
             <div className="mt-5">
@@ -188,7 +192,7 @@ function CourseDetails() {
             <div className="flex justify-between items-center my-4">
               <div>
                 <p className="text-3xl text-richblack-5 font-medium">Course Content</p>
-                <div className="flex justify-start gap-x-2">
+                <div className="flex justify-start flex-wrap gap-x-2">
                   <p className="text-base text-richblack-5 font-medium my-2">{course?.courseContent?.length} Section(s)</p>
                   <p className="text-base text-richblack-5 font-medium my-2">{totalLectures} lecture(s)</p>
                   <p className="text-base text-richblack-5 font-medium my-2">{Math.round(totalDuration * 10) / 10}Min Content length</p>
@@ -209,7 +213,7 @@ function CourseDetails() {
                     {section?.subSection?.map((item) => (
                       <div key={item?._id} className="flex justify-between">
 
-                        <div className="flex justify-start items-center gap-x-2 cursor-pointer"><MdOndemandVideo className="text-xl" /><p>{item?.title}</p></div>
+                        <div className="flex justify-start items-center gap-x-2 cursor-pointer py-2"><MdOndemandVideo className="text-xl" /><p>{item?.title}</p></div>
                         <p>{Math.round((item?.timeDuration / 60) * 10) / 10}Min</p>
                       </div>
                     ))}

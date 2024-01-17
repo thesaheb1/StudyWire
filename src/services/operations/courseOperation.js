@@ -159,7 +159,7 @@ export const fetchCourseDetails = async (data) => {
 export const fetchAverageRating = async (data) => {
   let result = null;
   try {
-    const response = await apiConnector("GET", course.get_average_rating_api, data);
+    const response = await apiConnector("POST", course.get_average_rating_api, data);
     if (!response?.data?.status) {
       throw new Error(response);
     }

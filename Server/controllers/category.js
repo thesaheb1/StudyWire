@@ -1,4 +1,3 @@
-const { default: mongoose } = require("mongoose");
 const Category = require("../models/categoryModel");
 
 exports.createCategory = async (req, res) => {
@@ -55,37 +54,6 @@ exports.getAllCategory = async (req, res) => {
       status: false,
       error: error,
       message: "Failed to Fetch Category",
-    });
-  }
-};
-
-exports.getSelectedCategory = async (req, res) => {
-  const { categoryId } = req.body;
-
-  try {
-    const selectedCategory = await Category.findById(categoryId)
-      .populate("courses")
-      .exec();
-    const otherCategory = await Category.find({
-      _id: { $ne: categoryId },
-    })
-      .populate("courses")
-      .exec();
-    const data = {
-      selectedCategory,
-      otherCategory,
-    };
-    return res.status(200).json({
-      status: true,
-      statusCode: 200,
-      data,
-      message: "Selected-Category Fetched Successsfully",
-    });
-  } catch (error) {
-    return res.json({
-      status: false,
-      error: error,
-      message: "Failed to Fetch Selected-Category",
     });
   }
 };
