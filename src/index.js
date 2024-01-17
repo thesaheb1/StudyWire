@@ -55,7 +55,6 @@ import CourseDetails from "./components/core/course/CourseDetails";
 // redux
 import { Provider } from "react-redux";
 import store from "./redux/store/store";
-import { Toaster } from "react-hot-toast";
 
 const appRouter = createBrowserRouter([
   {
@@ -177,7 +176,6 @@ root.render(
   <Provider store={store}>
     <RouterProvider router={appRouter}>
       <App />
-      <Toaster />
     </RouterProvider>
   </Provider>
 );

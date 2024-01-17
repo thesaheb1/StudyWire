@@ -14,6 +14,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 // import toaster for notifications
 import { getUserDetails } from "./services/operations/profileOperation";
 import { useDispatch } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const navigate = useNavigate();
@@ -26,11 +27,14 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div className="App w-screen min-h-[calc(100vh-5rem)] bg-richblack-900">
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <>
+      <div className="App w-screen min-h-[calc(100vh-5rem)] bg-richblack-900">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+      <Toaster />
+    </>
 
   );
 };
