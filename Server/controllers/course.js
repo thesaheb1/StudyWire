@@ -216,12 +216,18 @@ exports.getAllCourses = async (req, res) => {
         thumbnail: true,
         ratingAndReview: true,
         instructor: true,
-        category: true,
         createdAt: true,
-        courseLanguage: true,
-        courseContent: true,
+        enrolledStudent: true,
+        category:true
       }
-    ).populate("ratingAndReview").populate("category").populate("instructor").exec();
+    ).populate({
+      path: "ratingAndReview",
+      select: "rating"
+    }).populate({
+      path: "instructor",
+      select: "firstName lastName",
+
+    }).populate("category").exec();
     if (!allCourses) {
       return res.status(404).json({
         status: false,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, matchPath, useLocation } from "react-router-dom";
+import { Link, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { fetchAllCoursecategories } from "../../../services/operations/courseOperation";
 import { setFilteredData } from "../../../redux/feature/courseSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ const CourseTab = () => {
 
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
@@ -21,24 +22,22 @@ const CourseTab = () => {
 
 
   useEffect(() => {
-    // fetch categories
-    ; (async () => {
-      setLoading(true);
-      const categories = await fetchAllCoursecategories();
-      if (categories.length > 0) {
-        setAllCategories(categories);
-      }
-      setLoading(false);
-    })()
+    navigate("/courses/all")
+      // fetch categories
+      ; (async () => {
+        setLoading(true);
+        const categories = await fetchAllCoursecategories();
+        if (categories.length > 0) {
+          setAllCategories(categories);
+        }
+        setLoading(false);
+      })()
 
     // eslint-disable-next-line
   }, [])
 
-
-  
-
   const FilterTabCourses = () => {
-    const filtered = courseData?.filter((item) => {
+    const initialFiltered = courseData?.filter((item) => {
       if (location?.pathname?.split("/")?.slice(-1)[0] === "all") {
         return item
       }
@@ -49,17 +48,16 @@ const CourseTab = () => {
       return null;
     })
 
-    dispatch(setFilteredData(filtered))
+    dispatch(setFilteredData(initialFiltered))
+    // SortBy(initialFiltered);
+
   }
 
- 
-
   useEffect(() => {
-
     FilterTabCourses();
-
     // eslint-disable-next-line
-  }, [location?.pathname?.split("/")?.slice(-1)[0]])
+  }, [location?.pathname])
+
 
 
 

@@ -5,8 +5,15 @@ import { TiStarOutline } from "react-icons/ti";
 import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 
-const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags }) => {
+const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags, ratingAndReview }) => {
   const navigate = useNavigate();
+  const getAverageRating = (ratingAndReview) => {
+    let totalRating = ratingAndReview?.reduce((accumulator, currentValue) => (
+      accumulator += currentValue.rating
+    ),0)
+    let averageRating = totalRating/(ratingAndReview?.length);
+    return averageRating > 0 ? averageRating : 0;
+  }
   return (
       <div onClick={() => navigate(_id)} className="flex flex-col justify-between bg-richblack-500/30 border-[1px] border-richblack-700 rounded-lg cursor-pointer hover:shadow-[rgba(255,255,255,0.2)_10px_10px_10px_0px] hover:scale-105 transition-all duration-200">
         <img
@@ -32,10 +39,10 @@ const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags }) => 
           </span>
         </p>
         <div className="text-richblack-400 font-medium flex justify-start items-center gap-x-4 px-4 pb-2">
-          <span className="text-yellow-50 text-base font-bold pt-1">4.5</span>
+          <span className="text-yellow-50 text-base font-bold pt-1">{getAverageRating(ratingAndReview)}</span>
           <ReactStars
             count={5}
-            value={4.5}
+            value={getAverageRating(ratingAndReview)}
             edit={false}
             size={24}
             color="#585D69"
@@ -45,7 +52,7 @@ const CourseCard = ({ _id, thumbnail, courseName, instructor, price, tags }) => 
             halfIcon={<TiStarHalfOutline />}
             fullIcon={<TiStarFullOutline />}
           />{" "}
-          <span className="pt-1">(20 Ratings)</span>
+          <span className="pt-1">({ratingAndReview.length} Ratings)</span>
         </div>
 
         <div className="w-full flex justify-between items-center px-4 py-4 rounded-b-lg">
