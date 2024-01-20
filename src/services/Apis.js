@@ -34,6 +34,7 @@ export const course = {
     get_course_details_api: BASE_URL + "/course/get-course-details",
     create_courses_api: BASE_URL + "/course/create-course",
     update_courses_api: BASE_URL + "/course/edit-course",
+    fetch_enrolled_courses_api: BASE_URL + "/course/get-enrolled-courses",
     fetch_instructor_courses_api: BASE_URL + "/course/instructor-courses",
     delete_courses_api: BASE_URL + "/course/delete-course",
 

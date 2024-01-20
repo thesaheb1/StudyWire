@@ -49,7 +49,6 @@ const CourseTab = () => {
     })
 
     dispatch(setFilteredData(initialFiltered))
-    // SortBy(initialFiltered);
 
   }
 

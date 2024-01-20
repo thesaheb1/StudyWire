@@ -1,13 +1,10 @@
 import { RxLapTimer } from "react-icons/rx";
 import React, { useState, useEffect } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useDispatch, useSelector } from "react-redux";
-import { profile } from "../../services/Apis";
-import { apiConnector } from "../../services/apiConnector";
-import toast from "react-hot-toast";
-import { setCredentialData } from "../../redux/feature/authSlice";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/common/Loader";
+import { fetchEnrolledCourses } from "../../services/operations/courseOperation";
 
 const EnrolledCourses = () => {
   const tabsName = [
@@ -16,9 +13,9 @@ const EnrolledCourses = () => {
     { id: 3, title: "Completed" },
   ];
   const [activeTab, setActiveTab] = useState(tabsName[0]?.title);
-  const { credentialData, token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.auth);
+  const [enrolledCourses, setEnrolledCourses] = useState(null);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function getTotalTimeDuration(course) {
@@ -65,39 +62,22 @@ const EnrolledCourses = () => {
     return parseInt(((completedVideo[0]?.completedVideos.length) / lectures) * 100);
   }
 
-  const fetchUserDetails = async () => {
-    setLoading(true);
-    try {
-      const response = await apiConnector(
-        "GET",
-        profile.get_user_details_api,
-        null,
-        {
-          Authorization: `Bearer ${token}`,
-        }
-      );
-
-      console.log("User details.....", response);
-
-      if (!response?.data?.status) {
-        throw new Error(response);
-      }
-
-      dispatch(setCredentialData(response?.data?.data));
-      toast.success("Courses fetch successfully");
-    } catch (error) {
-      console.log("Fetching User Details............", error);
-      toast.error(error?.response?.data?.message);
-    }
-    setLoading(false);
-  };
+  
 
   useEffect(() => {
-    // fetch user Details
-    fetchUserDetails();
 
-    // eslint-disable-next-line
-  }, []);
+
+    ; (async () => {
+      setLoading(true);
+      const result = await fetchEnrolledCourses(token);
+      if (result) {
+        setEnrolledCourses(result);
+      }
+      setLoading(false);
+    })()
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return loading ? (<Loader dashboard={true} />) : (
     <div className="w-full min-h-[calc(100vh-4rem)] ml-[60px] p-4 sm:p-8 xl:p-16 relative">
@@ -106,7 +86,7 @@ const EnrolledCourses = () => {
           Enrolled Courses
         </h1>
 
-        {credentialData?.courses?.length > 0 && <div className="w-fit p-1 gap-x-2 sm:gap-x-4 rounded-full bg-richblack-800 text-richblack-200 flex justify-between items-center font-medium ">
+        {enrolledCourses?.courses?.length > 0 && <div className="w-fit p-1 gap-x-2 sm:gap-x-4 rounded-full bg-richblack-800 text-richblack-200 flex justify-between items-center font-medium ">
           {tabsName.map((element) => {
             return (
               <div
@@ -122,15 +102,15 @@ const EnrolledCourses = () => {
           })}
         </div>}
       </div>
-      {credentialData?.courses?.length > 0 ? (<>
+      {enrolledCourses?.courses?.length > 0 ? (<>
         <div className="w-full rounded-t-lg mt-8 text-richblack-50 font-medium hidden lg:flex justify-between items-center bg-richblack-700 p-4">
           <div className="w-[55%]">Course Name</div>
           <div className="w-1/5">Durations</div>
           <div className="w-1/5">Progress</div>
         </div>
         <div className="w-full max-h-[calc(100vh-15rem)] sm:max-h-[calc(100vh-18rem)] lg:max-h-[calc(100vh-22rem)] xl:max-h-[calc(100vh-24rem)] flex flex-col gap-2 overflow-y-auto p-2 border-2 border-richblack-700 rounded-lg lg:rounded-t-none mt-8 lg:mt-0">
-          {credentialData?.courses?.map((course) => (
-            checksum(credentialData, course) && <div
+          {enrolledCourses?.courses?.map((course) => (
+            checksum(enrolledCourses, course) && <div
               onClick={() =>
                 navigate(
                   `/view-course/${course?._id}/section/${course?.courseContent[0]?._id}/sub-section/${course?.courseContent[0]?.subSection[0]?._id}`
@@ -168,14 +148,14 @@ const EnrolledCourses = () => {
                   <div className="flex justify-between items-center gap-4 w-full">
                     <ProgressBar
                       className="w-full"
-                      completed={getProgressData(credentialData, course)}
-                      bgColor={getProgressData(credentialData, course) === 100 ? "#03C988" : "#FFD60A"}
+                      completed={getProgressData(enrolledCourses, course)}
+                      bgColor={getProgressData(enrolledCourses, course) === 100 ? "#03C988" : "#FFD60A"}
                       baseBgColor="#585D69"
                       isLabelVisible={false}
                       height="10px"
                     />
-                    <p className={`${getProgressData(credentialData, course) === 100 ? "text-[#03C988]" : "text-[#FFD60A]"} text-lg font-bold`}>
-                      {getProgressData(credentialData, course)}
+                    <p className={`${getProgressData(enrolledCourses, course) === 100 ? "text-[#03C988]" : "text-[#FFD60A]"} text-lg font-bold`}>
+                      {getProgressData(enrolledCourses, course)}
                       %
                     </p>
                   </div>

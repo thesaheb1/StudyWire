@@ -23,19 +23,9 @@ const logIn = async (req, res) => {
 
   try {
     // check user is exists or not
-    const isUserExists = await User.findOne({ email })
+    const isUserExists = await User.findOne({ email }, "_id firstName lastName email password accountType image token additionalDetails courses")
       .populate("additionalDetails")
-      .populate({
-        path: "courses",
-        populate: {
-          path: "courseContent",
-          populate: {
-            path: "subSection",
-          },
-        },
-      })
       .exec();
-
     if (!isUserExists) {
       return res.status(404).json({
         status: false,
@@ -47,7 +37,7 @@ const logIn = async (req, res) => {
     // check password is correct or incorrect
     const isPasswordMatched = await bcrypt.compare(
       password,
-      isUserExists.password
+      isUserExists?.password
     );
 
     if (!isPasswordMatched) {
@@ -61,13 +51,14 @@ const logIn = async (req, res) => {
     // create token and pass into cookie
     const token = jwt.sign(
       {
-        id: isUserExists._id,
-        email: isUserExists.email,
-        accountType: isUserExists.accountType,
-        additionalDetails: isUserExists.additionalDetails,
+        id: isUserExists?._id,
+        email: isUserExists?.email,
+        accountType: isUserExists?.accountType,
+        additionalDetails: isUserExists?.additionalDetails,
       },
       process.env.JWT_SECRET_KEY
     );
+
 
     const options = {
       expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
@@ -77,10 +68,21 @@ const logIn = async (req, res) => {
     res.cookie("token", token, options).status(200).json({
       status: true,
       statusCode: 200,
-      data: isUserExists,
+      data: {
+        _id: isUserExists?._id,
+        firstName: isUserExists?.firstName,
+        lastName: isUserExists?.lastName,
+        email: isUserExists?.email,
+        accountType: isUserExists?.accountType,
+        image: isUserExists?.image,
+        token: isUserExists?.token,
+        additionalDetails: isUserExists?.additionalDetails,
+        courses: isUserExists?.courses
+      },
       token: token,
       message: "account LogIn Successfully",
     });
+
   } catch (error) {
     return res.status(500).json({
       status: false,

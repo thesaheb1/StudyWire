@@ -16,6 +16,7 @@ const {
   deleteCourse,
   getAllCourses,
   getCourseDetails,
+  getEnrolledCourses,
 } = require("../controllers/course");
 
 //-------------------------|Section Controller|--------------------------//
@@ -42,12 +43,10 @@ const {
 //-------------------------|Category Controller|--------------------------//
 const {
   createCategory,
-  getAllCategory,
-  getSelectedCategory,
-} = require("../controllers/category");
+  getAllCategory } = require("../controllers/category");
 
 //-------------------------|Course Progress Controller|--------------------------//
-const {updateCourseProgress} = require("../controllers/courseProgress");
+const { updateCourseProgress } = require("../controllers/courseProgress");
 
 //-------------------------|Authentication Controller|--------------------------//
 const AuthN = require("../middlewares/authentication");
@@ -68,6 +67,9 @@ router.post("/create-course", AuthN, isInstructor, createCourse);
 
 //-------------------------|Update Course (only Instructor)|--------------------------//
 router.put("/edit-course", AuthN, isInstructor, editCourse);
+
+//-------------------------|Get user's Enrolled Courses (Only LoggedIn User)|--------------------------//
+router.get("/get-enrolled-courses", AuthN,isStudent, getEnrolledCourses);
 
 //-------------------------|get Courses (only Instructor)|--------------------------//
 router.get("/instructor-courses", AuthN, isInstructor, getInstructorCourses);

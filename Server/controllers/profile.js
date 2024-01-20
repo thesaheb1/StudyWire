@@ -178,18 +178,18 @@ exports.deleteAccount = async (req, res) => {
 exports.getUserDetails = async (req, res) => {
   const userId = req?.user?.id;
   try {
-    const userDatails = await User.findById(userId)
+    const userDatails = await User.findById(userId, {
+      _id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      accountType: true,
+      image: true,
+      token: true,
+      additionalDetails: true,
+      courses: true,
+    })
       .populate("additionalDetails")
-      .populate("courseProgress")
-      .populate({
-        path: "courses",
-        populate: {
-          path: "courseContent",
-          populate: {
-            path: "subSection",
-          },
-        },
-      })
       .exec();
     if (!userDatails) {
       return res.status(404).json({
@@ -275,36 +275,6 @@ exports.updateDisplayPicture = async (req, res) => {
   }
 };
 
-// Show Enrolled Courses
-exports.getEnrolledCourses = async (req, res) => {
-  const userId = req?.user?.id;
-
-  try {
-    const userEnrolledCourses = User.findById(userId)
-      .populate("courses")
-      .exec();
-    if (!userEnrolledCourses) {
-      return res.status(404).json({
-        status: false,
-        statusCode: 404,
-        message: "User Courses Not Found",
-      });
-    }
-    return res.status(200).json({
-      status: true,
-      statusCode: 200,
-      data: userEnrolledCourses,
-      message: "User Courses Fetched Successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({
-      status: false,
-      statusCode: 500,
-      error: error.message,
-      message: "Failed to fetch user Courses",
-    });
-  }
-};
 
 exports.getInstructorDashboard = async (req, res) => {
   try {

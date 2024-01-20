@@ -21,7 +21,7 @@ export const getUserDetails = (token, navigate) => {
       }
       dispatch(setCredentialData(response?.data?.data));
       navigate("/dashboard/my-profile");
-
+      console.log("UserDetailsResponse : ", response)
       toast.success(response?.data?.message);
     } catch (error) {
       console.log("error in login : ", error);

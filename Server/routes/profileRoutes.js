@@ -14,7 +14,6 @@ const {
   deleteAccount,
   getUserDetails,
   updateDisplayPicture,
-  getEnrolledCourses,
   getInstructorDashboard
 } = require("../controllers/profile");
 
@@ -39,9 +38,6 @@ router.get("/get-user-details", AuthN, getUserDetails);
 
 //-------------------------|Update Display Picture (Only LoggedIn User)|--------------------------//
 router.put("/update-dp", AuthN, updateDisplayPicture);
-
-//-------------------------|Get user's Enrolled Courses (Only LoggedIn User)|--------------------------//
-router.get("/get-enrolled-courses", AuthN, getEnrolledCourses);
 
 //-------------------------|Get user's Enrolled Courses (Only LoggedIn User)|--------------------------//
 router.get("/get-instructor-dashboard", AuthN, isInstructor, getInstructorDashboard);

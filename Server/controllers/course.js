@@ -210,6 +210,7 @@ exports.getAllCourses = async (req, res) => {
     const allCourses = await Course.find(
       { status: "Published" },
       {
+        _id: true,
         courseName: true,
         price: true,
         tags: true,
@@ -218,7 +219,7 @@ exports.getAllCourses = async (req, res) => {
         instructor: true,
         createdAt: true,
         enrolledStudent: true,
-        category:true
+        category: true
       }
     ).populate({
       path: "ratingAndReview",
@@ -311,18 +312,63 @@ exports.getCourseDetails = async (req, res) => {
   }
 };
 
+// Show Enrolled Courses
+exports.getEnrolledCourses = async (req, res) => {
+  const userId = req?.user?.id;
+
+  try {
+    const userEnrolledCourses = await User.findById(userId, {
+      _id:true,
+      courseProgress: true,
+      courses: true
+    })
+    .populate("courseProgress")
+    .populate({
+      path: "courses",
+      populate: {
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      },
+    })
+    .exec();
+    if (!userEnrolledCourses) {
+      return res.status(404).json({
+        status: false,
+        statusCode: 404,
+        message: "User Courses Not Found",
+      });
+    }
+    return res.status(200).json({
+      status: true,
+      statusCode: 200,
+      data: userEnrolledCourses,
+      message: "User Courses Fetched Successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: false,
+      statusCode: 500,
+      error: error.message,
+      message: "Failed to fetch user Courses",
+    });
+  }
+};
+
 exports.getInstructorCourses = async (req, res) => {
   const instructorId = req?.user?.id;
 
   try {
     const instructorCourses = await Course.find({
       instructor: instructorId
-    }).populate({
-      path: "courseContent",
-      populate: {
-        path: "subSection",
-      },
     })
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
       .exec();
 
     if (!instructorCourses) {

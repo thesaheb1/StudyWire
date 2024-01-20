@@ -89,8 +89,6 @@ exports.createRatingAndReview = async (req, res) => {
 exports.getAverageRating = async (req, res) => {
   const { courseId } = req?.body;
 
-  console.log('Average rating......',courseId);
-
   if(!courseId){
     return res.status(422).json({
       status: false,

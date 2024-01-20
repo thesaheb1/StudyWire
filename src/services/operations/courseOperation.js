@@ -132,8 +132,37 @@ export const fetchInstructorCourses = async (token) => {
       throw new Error(response);
     }
     result = response?.data?.data;
+    toast.success(response?.data?.message);
+    console.log("My courses.....", response);
   } catch (error) {
     console.log("COURSE FETCHING API ERROR............", error);
+    toast.error(error?.response?.data?.message);
+  }
+  return result;
+};
+
+export const fetchEnrolledCourses = async (token) => {
+  let result = null;
+  try {
+    const response = await apiConnector(
+      "GET",
+      course.fetch_enrolled_courses_api,
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    );
+
+    
+    if (!response?.data?.status) {
+      throw new Error(response);
+    }
+    result = response?.data?.data;
+
+    toast.success(response?.data?.message);
+    console.log("Enrolled courses.....", response);
+  } catch (error) {
+    console.log("Enrolled courses error............", error);
     toast.error(error?.response?.data?.message);
   }
   return result;
