@@ -23,7 +23,7 @@ const AuthTemplate = ({ title, desc1, desc2, formtype }) => {
         ) : (
           <SignupForm />
         )}
-        <div className="flex w-full items-center my-4 gap-x-2 text-white">
+        {/* <div className="flex w-full items-center my-4 gap-x-2 text-white">
           <div className="w-full h-[1px] bg-white"></div>
           <p>or</p>
           <div className="w-full h-[1px] bg-white"></div>
@@ -33,7 +33,7 @@ const AuthTemplate = ({ title, desc1, desc2, formtype }) => {
             <FcGoogle />
           </p>
           <p className="text-white">Sign in with Google</p>
-        </button>
+        </button> */}
       </div>
 
       <div className="hidden md:block relative w-11/12 max-w-[450px] z-9">
