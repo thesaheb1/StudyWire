@@ -159,7 +159,7 @@ function CourseDetails() {
                   />
                 </div>
                 <div className="text-richblack-50 font-normal flex gap-x-4 gap-y-2">
-                  <p>({course?.ratingAndReview.length} Ratings)</p>
+                  <p>({course?.ratingAndReview?.length} Ratings)</p>
                   <p> {course?.enrolledStudent?.length} students enrolled</p>
                 </div>
               </div>
@@ -206,7 +206,7 @@ function CourseDetails() {
                   <summary className="px-6 py-6 bg-richblack-800 border-[1px] border-richblack-600 cursor-pointer">
                     <div className="inline-flex justify-between items-center">
                       <p className="text-xl font-medium">{section?.sectionName}</p>
-                      <p className="text-yellow-50 text-base pl-4"><span className="p-1">{section?.subSection.length}</span>lecture(s)</p>
+                      <p className="text-yellow-50 text-base pl-4"><span className="p-1">{section?.subSection?.length}</span>lecture(s)</p>
                     </div>
                   </summary>
                   <div className="px-6 py-4 text-base font-medium border-[1px] border-richblack-600">
@@ -228,8 +228,8 @@ function CourseDetails() {
             <div className="flex items-center gap-4 py-4">
               <img
                 src={
-                  course?.instructor.image
-                    ? course?.instructor.image
+                  course?.instructor?.image
+                    ? course?.instructor?.image
                     : `https://api.dicebear.com/5.x/initials/svg?seed=${course?.instructor?.firstName} ${course?.instructor?.lastName}`
                 }
                 alt="Author"
